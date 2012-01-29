@@ -40,7 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionSubtractionBinaryOperationGenerator.cs" />
+    <Compile Include="AddOperation.cs" />
+    <Compile Include="BinaryOperation.cs" />
+    <Compile Include="CodeAnnotations.cs" />
+    <Compile Include="Complexities.cs" />
+    <Compile Include="ExerciseGenerator.cs" />
+    <Compile Include="GenerationContext.cs" />
+    <Compile Include="GeneratorContextExtensions.cs" />
+    <Compile Include="IntExerciseGenerator.cs" />
+    <Compile Include="IntRandomNumberGenerator.cs" />
+    <Compile Include="IOperationGenerator.cs" />
+    <Compile Include="IRandomNumberGenerator.cs" />
+    <Compile Include="Number.cs" />
+    <Compile Include="NumberGenerator.cs" />
+    <Compile Include="Operation.cs" />
+    <Compile Include="OperatorGeneratorExtensions.cs" />
+    <Compile Include="ProbabilityGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomNumberGeneratorExtensions.cs" />
+    <Compile Include="SubstractOperation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
