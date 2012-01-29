@@ -39,5 +39,19 @@ namespace MathExercisesGenerator.Tests
 
 			Assert.That( op, Is.InstanceOf<BinaryOperation<int>>() );
 		}
+
+		[TestCase( 2.0 )]
+		[TestCase( 3.0 )]
+		[TestCase( 4.0 )]
+		public void ShouldBeAbleToGenerateExerciseWithGivenComplexity( double complexity )
+		{
+			var gen = CreateExerciseGenerator( complexity );
+
+			var op = gen.Generate();
+
+			Console.WriteLine( op );
+
+			Assert.That( op, Is.Not.Null );
+		}
 	}
 }
