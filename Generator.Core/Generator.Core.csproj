@@ -52,6 +52,7 @@
     <Compile Include="IntRandomNumberGenerator.cs" />
     <Compile Include="IOperationGenerator.cs" />
     <Compile Include="IRandomNumberGenerator.cs" />
+    <Compile Include="BracketsVisitor.cs" />
     <Compile Include="Number.cs" />
     <Compile Include="NumberGenerator.cs" />
     <Compile Include="Operation.cs" />

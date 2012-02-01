@@ -6,8 +6,6 @@ namespace Generator.Core
 
 		public abstract string Text { get; }
 
-		public abstract double Complexity { get; }
-
 		public override string ToString()
 		{
 			return Text;

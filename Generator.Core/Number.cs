@@ -20,10 +20,34 @@ namespace Generator.Core
 		{
 			get { return _value.ToString( CultureInfo.InvariantCulture ); }
 		}
+	}
 
-		public override double Complexity
+	public sealed class Brackets : Operation<int>
+	{
+		private readonly Operation<int> _inner;
+
+		public Brackets( Operation<int> inner )
 		{
-			get { return 0; }
+			_inner = inner;
 		}
+
+		#region Overrides of Operation<int>
+
+		public override int Evaluate()
+		{
+			var value = _inner.Evaluate();
+			return value;
+		}
+
+		public override string Text
+		{
+			get
+			{
+				string text = string.Format( "({0})", _inner.Text );
+				return text;
+			}
+		}
+
+		#endregion
 	}
 }
