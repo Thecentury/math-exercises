@@ -13,8 +13,16 @@ namespace MathExercisesGenerator
 
 		public ApplicationViewModel()
 		{
-			IntExerciseGenerator gen = new IntExerciseGenerator( new ProbabilityGenerator(), new IntRandomNumberGenerator(), 2,
-				new NumberGenerator(), new AdditionSubtractionBinaryOperationGenerator() );
+			const double maxComplexity = 1.0;
+
+			IntExerciseGenerator gen = new IntExerciseGenerator(new ProbabilityGenerator(), new IntRandomNumberGenerator(),
+			                                                    maxComplexity,
+			                                                    new NumberGenerator(),
+			                                                    new AdditionSubtractionBinaryOperationGenerator())
+			                           	{
+			                           		MinValue = 0,
+			                           		MaxValue = 100
+			                           	};
 
 			ConvertToLineVisitor visitor = new ConvertToLineVisitor();
 

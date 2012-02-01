@@ -11,10 +11,13 @@ namespace Generator.Core
 		private readonly IRandomNumberGenerator<T> _numberGenerator;
 		private readonly double _maxComplexity;
 
+		public T MinValue { get; set; }
+		public T MaxValue { get; set; }
+
 		private readonly List<IOperationGenerator<T>> _generators = new List<IOperationGenerator<T>>();
 
 		public ExerciseGenerator( IRandomNumberGenerator<double> probabilityGenerator, IRandomNumberGenerator<T> numberGenerator, double maxComplexity,
-		                          [NotNull] params IOperationGenerator<T>[] generators )
+								  [NotNull] params IOperationGenerator<T>[] generators )
 		{
 			if ( probabilityGenerator == null ) throw new ArgumentNullException( "probabilityGenerator" );
 			if ( numberGenerator == null ) throw new ArgumentNullException( "numberGenerator" );
@@ -29,7 +32,15 @@ namespace Generator.Core
 
 		public Operation<T> Generate( GenerationContext<T> context )
 		{
-			var acceptedGenerators = _generators.Where( g => g.Complexity <= context.MaxComplexity );
+			var generator = GetSuitableGenerator( context );
+
+			var op = generator.Generate( context );
+			return op;
+		}
+
+		private IOperationGenerator<T> GetSuitableGenerator( GenerationContext<T> context )
+		{
+			var acceptedGenerators = _generators.Where( g => g.Complexity <= context.MaxComplexity ).ToList();
 
 			double weightsSum = acceptedGenerators.Sum( g => g.GetWeight() );
 			double probability = _probabilityGenerator.GetProbability() * weightsSum;
@@ -45,14 +56,17 @@ namespace Generator.Core
 					break;
 				}
 			}
-
-			var op = generator.Generate( context );
-			return op;
+			return generator;
 		}
 
 		public Operation<T> Generate()
 		{
-			var context = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, this, _maxComplexity );
+			var context = new GenerationContext<T>(_probabilityGenerator, _numberGenerator, this, _maxComplexity)
+			              	{
+			              		MinValue = MinValue,
+								MaxValue = MaxValue
+			              	};
+
 			var operation = Generate( context );
 			return operation;
 		}
