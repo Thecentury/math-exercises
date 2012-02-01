@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryOperationGeneratorTests.cs" />
+    <Compile Include="BracketsVisitorTests.cs" />
     <Compile Include="ExerciseGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,24 +1,36 @@
 using System;
+using JetBrains.Annotations;
 
 namespace Generator.Core
 {
 	public abstract class BinaryOperation<T> : Operation<T>
 	{
-		private readonly Operation<T> _operand1;
-		private readonly Operation<T> _operand2;
+		public Operation<T> Left { get; set; }
+		public Operation<T> Right { get; set; }
 
-		protected BinaryOperation( Operation<T> operand1, Operation<T> operand2 )
+		protected BinaryOperation() { }
+
+		protected BinaryOperation( [NotNull] Operation<T> left, [NotNull] Operation<T> right )
 		{
-			_operand1 = operand1;
-			_operand2 = operand2;
+			if ( left == null )
+			{
+				throw new ArgumentNullException( "left" );
+			}
+			if ( right == null )
+			{
+				throw new ArgumentNullException( "right" );
+			}
+
+			Left = left;
+			Right = right;
 		}
 
 		protected abstract T EvaluateCore( T value1, T value2 );
 
 		public sealed override T Evaluate()
 		{
-			T value1 = _operand1.Evaluate();
-			T value2 = _operand2.Evaluate();
+			T value1 = Left.Evaluate();
+			T value2 = Right.Evaluate();
 			T value = EvaluateCore( value1, value2 );
 			return value;
 		}
@@ -30,25 +42,13 @@ namespace Generator.Core
 			get
 			{
 				string operation = OperationText;
-				string text1 = _operand1.Text;
-				string text2 = _operand2.Text;
+				string text1 = Left.Text;
+				string text2 = Right.Text;
 
 				return String.Format( "{0} {1} {2}", text1, operation, text2 );
 			}
 		}
 
-		public sealed override double Complexity
-		{
-			get
-			{
-				double complexity = _operand1.Complexity + _operand2.Complexity + OperationComplexity;
-				return complexity;
-			}
-		}
-
-		protected virtual double OperationComplexity
-		{
-			get { return 1; }
-		}
+		public abstract BinaryOperation<T> CloneCore();
 	}
 }
