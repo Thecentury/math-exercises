@@ -27,17 +27,25 @@
 		</DataTemplate>
 
 		<DataTemplate DataType="{x:Type MathExercisesGenerator:ExerciseViewModel}" x:Key="terms">
-			<ItemsControl ItemsSource="{Binding Terms}">
-				<ItemsControl.ItemsPanel>
-					<ItemsPanelTemplate>
-						<StackPanel Orientation="Horizontal" IsItemsHost="True"/>
-					</ItemsPanelTemplate>
-				</ItemsControl.ItemsPanel>
-			</ItemsControl>
+			<StackPanel Orientation="Horizontal"
+						VerticalAlignment="Center"
+						HorizontalAlignment="Right"
+						Margin="10,10,3,10">
+				<ItemsControl ItemsSource="{Binding Terms}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Orientation="Horizontal" IsItemsHost="True"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+				</ItemsControl>
+				<TextBlock Margin="4,0,0,0">=</TextBlock>
+			</StackPanel>
 		</DataTemplate>
 
 		<DataTemplate DataType="{x:Type MathExercisesGenerator:ExerciseViewModel}" x:Key="answer">
-			<TextBox Text="{Binding UserValue, Mode=TwoWay, UpdateSourceTrigger=Default}"/>
+			<TextBox Text="{Binding UserValue, Mode=TwoWay, UpdateSourceTrigger=Default}" 
+					 MinWidth="25"
+					 VerticalContentAlignment="Center"/>
 		</DataTemplate>
 
 	</Window.Resources>
@@ -46,7 +54,14 @@
 		<DataGrid ItemsSource="{Binding Exercises}" 
 				  MinHeight="100" 
 				  AutoGenerateColumns="False"
-				  GridLinesVisibility="None">
+				  GridLinesVisibility="None"
+				  AllowDrop="False"
+				  CanUserAddRows="False"
+				  CanUserDeleteRows="False"
+				  CanUserReorderColumns="False"
+				  CanUserResizeColumns="False"
+				  CanUserSortColumns="False"
+				  HeadersVisibility="None">
 			<DataGrid.Columns>
 				<DataGridTemplateColumn CellTemplate="{StaticResource ResourceKey=terms}"/>
 				<DataGridTemplateColumn CellTemplate="{StaticResource ResourceKey=answer}"/>
