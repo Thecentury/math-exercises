@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Generator.Core;
 
 namespace MathExercisesGenerator
@@ -5,10 +6,17 @@ namespace MathExercisesGenerator
 	public sealed class ExerciseViewModel : BindingObject
 	{
 		private readonly Operation<int> _operation;
+		private readonly List<TermViewModel> _terms;
 
-		public ExerciseViewModel( Operation<int> operation )
+		public ExerciseViewModel( Operation<int> operation, List<TermViewModel> terms)
 		{
 			_operation = operation;
+			_terms = terms;
+		}
+
+		public List<TermViewModel> Terms
+		{
+			get { return _terms; }
 		}
 
 		public int CorrectValue

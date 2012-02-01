@@ -16,7 +16,7 @@ namespace Generator.Core
 			}
 			else
 			{
-				operation = new SubstractOperation( left, right );
+				operation = new SubtractOperation( left, right );
 			}
 
 			return operation;

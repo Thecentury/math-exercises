@@ -16,10 +16,19 @@ namespace MathExercisesGenerator
 			IntExerciseGenerator gen = new IntExerciseGenerator( new ProbabilityGenerator(), new IntRandomNumberGenerator(), 2,
 				new NumberGenerator(), new AdditionSubtractionBinaryOperationGenerator() );
 
+			ConvertToLineVisitor visitor = new ConvertToLineVisitor();
+
 			for ( int i = 0; i < _exercisesCount; i++ )
 			{
-				_exercises.Add( new ExerciseViewModel( gen.Generate() ) );
+				var op = gen.Generate();
+				var terms = visitor.VisitCore( op );
+				_exercises.Add( new ExerciseViewModel( op, terms ) );
 			}
+		}
+
+		public List<ExerciseViewModel> Exercises
+		{
+			get { return _exercises; }
 		}
 	}
 }
