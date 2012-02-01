@@ -20,7 +20,7 @@ namespace MathExercisesGenerator.Tests
 		[Test]
 		public void ShouldGenerateSubtraction()
 		{
-			CreateAndAssertBinaryOp<SubstractOperation>( 0 );
+			CreateAndAssertBinaryOp<SubtractOperation>( 0 );
 		}
 
 		private static void CreateAndAssertBinaryOp<T>( double rndMockValue )

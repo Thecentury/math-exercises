@@ -22,6 +22,10 @@ namespace MathExercisesGenerator
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			ApplicationViewModel vm = new ApplicationViewModel();
+
+			DataContext = vm;
 		}
 	}
 }

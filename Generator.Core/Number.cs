@@ -31,11 +31,9 @@ namespace Generator.Core
 			_inner = inner;
 		}
 
-		#region Overrides of Operation<int>
-
 		public override int Evaluate()
 		{
-			var value = _inner.Evaluate();
+			var value = Inner.Evaluate();
 			return value;
 		}
 
@@ -43,11 +41,14 @@ namespace Generator.Core
 		{
 			get
 			{
-				string text = string.Format( "({0})", _inner.Text );
+				string text = string.Format( "({0})", Inner.Text );
 				return text;
 			}
 		}
 
-		#endregion
+		public Operation<int> Inner
+		{
+			get { return _inner; }
+		}
 	}
 }

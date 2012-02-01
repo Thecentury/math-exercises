@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Generator.Core
 {
-	public sealed class BracketsVisitor
+	public sealed class BracketsVisitor : IVisitor<Operation<int>>
 	{
 		private Operation<int> Visit( BinaryOperation<int> op )
 		{
