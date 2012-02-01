@@ -47,7 +47,12 @@ namespace Generator.Core
 		[Pure]
 		public GenerationContext<T> CloneWithMaxComplexity( double maxComplexity )
 		{
-			GenerationContext<T> clone = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, _parentGenerator, maxComplexity );
+			GenerationContext<T> clone = new GenerationContext<T>(_probabilityGenerator, _numberGenerator, _parentGenerator,
+			                                                      maxComplexity)
+			                             	{
+			                             		MinValue = MinValue,
+												MaxValue = MaxValue
+			                             	};
 			return clone;
 		}
 	}
