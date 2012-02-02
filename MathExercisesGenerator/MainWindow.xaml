@@ -5,32 +5,52 @@
         xmlns:MathExercisesGenerator="clr-namespace:MathExercisesGenerator" Title="MainWindow" Height="850" Width="825">
 
 	<Window.Resources>
+		
+		<Style x:Key="textStyle" TargetType="FrameworkElement">
+			<Setter Property="TextBlock.FontSize" Value="20"/>
+			<Setter Property="TextBlock.FontFamily" Value="Consolas"/>
+		</Style>
+		
+		<Style TargetType="TextBlock" x:Key="termStyle" BasedOn="{StaticResource textStyle}">
+			<Setter Property="Margin" Value="2"/>
+		</Style>
 
 		<DataTemplate DataType="{x:Type Core:NumberViewModel}">
-			<TextBlock Text="{Binding Value}"/>
+			<TextBlock Text="{Binding Value}"
+					   Style="{StaticResource termStyle}"/>
 		</DataTemplate>
 
 		<DataTemplate DataType="{x:Type Core:AdditionViewModel}">
-			<TextBlock Text="+"/>
+			<TextBlock Text="+"
+					   Style="{StaticResource termStyle}"
+					   Foreground="Red"/>
 		</DataTemplate>
 
 		<DataTemplate DataType="{x:Type Core:SubtractionViewModel}">
-			<TextBlock Text="-"/>
+			<TextBlock Text="-"
+					   Style="{StaticResource termStyle}"
+					   Foreground="Blue"/>
 		</DataTemplate>
 
 		<DataTemplate DataType="{x:Type Core:OpeningBracketViewModel}">
-			<TextBlock Text="("/>
+			<TextBlock Text="("
+					   Style="{StaticResource termStyle}"
+					   Margin="2,2,0,2"/>
 		</DataTemplate>
 
 		<DataTemplate DataType="{x:Type Core:ClosingBracketViewModel}">
-			<TextBlock Text=")"/>
+			<TextBlock Text=")"
+					   Style="{StaticResource termStyle}"
+					   Margin="0,2,2,2"
+					   />
 		</DataTemplate>
 
 		<DataTemplate DataType="{x:Type MathExercisesGenerator:ExerciseViewModel}" x:Key="terms">
 			<StackPanel Orientation="Horizontal"
 						VerticalAlignment="Center"
 						HorizontalAlignment="Right"
-						Margin="10,10,3,10">
+						Margin="10,10,3,10"
+						Style="{StaticResource textStyle}">
 				<ItemsControl ItemsSource="{Binding Terms}">
 					<ItemsControl.ItemsPanel>
 						<ItemsPanelTemplate>
@@ -38,7 +58,8 @@
 						</ItemsPanelTemplate>
 					</ItemsControl.ItemsPanel>
 				</ItemsControl>
-				<TextBlock Margin="4,0,0,0">=</TextBlock>
+				<TextBlock Margin="4,0,0,0"
+						   >=</TextBlock>
 			</StackPanel>
 		</DataTemplate>
 
@@ -47,11 +68,17 @@
 					 MinWidth="25"
 					 VerticalContentAlignment="Center"/>
 		</DataTemplate>
+		
+		<Style TargetType="DataGridRow" x:Key="rowStyle">
+			<Setter Property="Background" Value="{x:Null}"/>
+		</Style>
 
 	</Window.Resources>
 
 	<Grid>
 		<DataGrid ItemsSource="{Binding Exercises}" 
+				  HorizontalAlignment="Center"
+				  BorderBrush="{x:Null}"
 				  MinHeight="100" 
 				  AutoGenerateColumns="False"
 				  GridLinesVisibility="None"
@@ -61,10 +88,15 @@
 				  CanUserReorderColumns="False"
 				  CanUserResizeColumns="False"
 				  CanUserSortColumns="False"
-				  HeadersVisibility="None">
+				  HeadersVisibility="None"
+				  Background="{x:Null}"
+				  RowStyle="{StaticResource rowStyle}"
+				  >
 			<DataGrid.Columns>
 				<DataGridTemplateColumn CellTemplate="{StaticResource ResourceKey=terms}"/>
 				<DataGridTemplateColumn CellTemplate="{StaticResource ResourceKey=answer}"/>
+
+				<DataGridTextColumn Binding="{Binding CorrectValue, Mode=OneWay}"/>
 			</DataGrid.Columns>
 		</DataGrid>
 	</Grid>
