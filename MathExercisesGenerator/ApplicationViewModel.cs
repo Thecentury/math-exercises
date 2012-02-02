@@ -13,23 +13,25 @@ namespace MathExercisesGenerator
 
 		public ApplicationViewModel()
 		{
-			const double maxComplexity = 1.0;
+			const double maxComplexity = 3.0;
 
-			IntExerciseGenerator gen = new IntExerciseGenerator(new ProbabilityGenerator(), new IntRandomNumberGenerator(),
-			                                                    maxComplexity,
-			                                                    new NumberGenerator(),
-			                                                    new AdditionSubtractionBinaryOperationGenerator())
-			                           	{
-			                           		MinValue = 0,
-			                           		MaxValue = 100
-			                           	};
+			IntExerciseGenerator gen = new IntExerciseGenerator( new ProbabilityGenerator(), new IntRandomNumberGenerator(),
+																maxComplexity,
+																new NumberGenerator(),
+																new AdditionSubtractionBinaryOperationGenerator() )
+										{
+											MinValue = 0,
+											MaxValue = 100
+										};
 
 			ConvertToLineVisitor visitor = new ConvertToLineVisitor();
+			BracketsVisitor bracketsVisitor = new BracketsVisitor();
 
 			for ( int i = 0; i < _exercisesCount; i++ )
 			{
 				var op = gen.Generate();
-				var terms = visitor.VisitCore( op );
+				var opWithBrackets = bracketsVisitor.VisitCore( op );
+				var terms = visitor.VisitCore( opWithBrackets );
 				_exercises.Add( new ExerciseViewModel( op, terms ) );
 			}
 		}
