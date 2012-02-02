@@ -4,3 +4,5 @@ _ReSharper.*
 */obj/*
 */bin/*
 *.DotSettings.user
+*.ncrunch*
+*.crunchsolution.cache
