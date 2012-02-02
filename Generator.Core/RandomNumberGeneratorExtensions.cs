@@ -4,7 +4,7 @@ namespace Generator.Core
 	{
 		public static double GetProbability( this IRandomNumberGenerator<double> generator )
 		{
-			return generator.Generate( 0, 1 );
+			return generator.Generate( new Range<double>( 0, 1 ) );
 		}
 
 		public static bool GetBool( this IRandomNumberGenerator<double> generator )
@@ -15,7 +15,7 @@ namespace Generator.Core
 
 		public static bool GetBool( this IRandomNumberGenerator<int> generator )
 		{
-			var randomValue = generator.Generate( 0, 2 );
+			var randomValue = generator.Generate( new Range<int>( 0, 2 ) );
 			return randomValue == 1;
 		}
 	}

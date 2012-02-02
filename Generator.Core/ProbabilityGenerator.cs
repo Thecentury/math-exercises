@@ -6,10 +6,10 @@ namespace Generator.Core
 	{
 		private readonly Random _rnd = new Random();
 
-		public double Generate( double min, double max )
+		public double Generate( Range<double> range )
 		{
 			double value = _rnd.NextDouble();
-			double result = min + value * (max - min);
+			double result = range.MinValue + value * (range.MaxValue - range.MinValue);
 			return result;
 		}
 	}
