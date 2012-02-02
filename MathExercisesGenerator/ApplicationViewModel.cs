@@ -18,11 +18,7 @@ namespace MathExercisesGenerator
 			IntExerciseGenerator gen = new IntExerciseGenerator( new ProbabilityGenerator(), new IntRandomNumberGenerator(),
 																maxComplexity,
 																new NumberGenerator(),
-																new AdditionSubtractionBinaryOperationGenerator() )
-										{
-											MinValue = 0,
-											MaxValue = 100
-										};
+																new AdditionSubtractionBinaryOperationGenerator() );
 
 			ConvertToLineVisitor visitor = new ConvertToLineVisitor();
 			BracketsVisitor bracketsVisitor = new BracketsVisitor();

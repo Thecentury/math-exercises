@@ -29,12 +29,12 @@ namespace MathExercisesGenerator.Tests
 			parentMock.Setup( g => g.Generate( It.IsAny<GenerationContext<int>>() ) ).Returns( new Number( 0 ) );
 
 			Mock<IRandomNumberGenerator<double>> rndMock = new Mock<IRandomNumberGenerator<double>>();
-			rndMock.Setup( r => r.Generate( 0, 1 ) ).Returns( rndMockValue );
+			rndMock.Setup( r => r.Generate( It.IsAny<Range<double>>() ) ).Returns( rndMockValue );
 
 			AdditionSubtractionBinaryOperationGenerator generator = new AdditionSubtractionBinaryOperationGenerator();
-			var context = new GenerationContext<int>(rndMock.Object, new Mock<IRandomNumberGenerator<int>>().Object,
-			                                         parentMock.Object, 1); 
-			var op = generator.Generate(context );
+			var context = new GenerationContext<int>( rndMock.Object, new Mock<IRandomNumberGenerator<int>>().Object,
+													 parentMock.Object, 1, new Range<int>( 0, 2 ) );
+			var op = generator.Generate( context );
 
 			Assert.That( op, Is.InstanceOf<T>() );
 		}

@@ -6,7 +6,7 @@ namespace Generator.Core
 	{
 		public static T NextValue<T>( this GenerationContext<T> context )
 		{
-			return context.NumberGenerator.Generate( context.MinValue, context.MaxValue );
+			return context.NumberGenerator.Generate( context.Range );
 		}
 
 		public static Operation<T>[] Generate<T>( this GenerationContext<T> context, int count )

@@ -11,9 +11,6 @@ namespace Generator.Core
 		private readonly IRandomNumberGenerator<T> _numberGenerator;
 		private readonly double _maxComplexity;
 
-		public T MinValue { get; set; }
-		public T MaxValue { get; set; }
-
 		private readonly List<IOperationGenerator<T>> _generators = new List<IOperationGenerator<T>>();
 
 		public ExerciseGenerator( IRandomNumberGenerator<double> probabilityGenerator, IRandomNumberGenerator<T> numberGenerator, double maxComplexity,
@@ -61,12 +58,9 @@ namespace Generator.Core
 
 		public Operation<T> Generate()
 		{
-			var context = new GenerationContext<T>(_probabilityGenerator, _numberGenerator, this, _maxComplexity)
-			              	{
-			              		MinValue = MinValue,
-								MaxValue = MaxValue
-			              	};
-
+			// todo brinchuk this is a dirty hack!
+			var context = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, this, _maxComplexity,
+												   (Range<T>)(object)Range<T>.IntInfinite() );
 			var operation = Generate( context );
 			return operation;
 		}
