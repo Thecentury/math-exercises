@@ -15,7 +15,7 @@ namespace MathExercisesGenerator.Tests
 		{
 			var gen = CreateExerciseGenerator( Complexities.NumberComplexity );
 
-			var op = gen.Generate();
+			var op = gen.Generate( new Range<int>( 0, 10 ) );
 
 			Assert.That( op, Is.InstanceOf<Number>() );
 		}
@@ -23,7 +23,7 @@ namespace MathExercisesGenerator.Tests
 		private static IntExerciseGenerator CreateExerciseGenerator( double maxComplexity )
 		{
 			NumberGenerator numberGenerator = new NumberGenerator();
-			AdditionSubtractionBinaryOperationGenerator addSubGenerator = new AdditionSubtractionBinaryOperationGenerator();
+			AdditionGenerator addSubGenerator = new AdditionGenerator();
 
 			IntExerciseGenerator gen = new IntExerciseGenerator( new ProbabilityGenerator(), new IntRandomNumberGenerator(), maxComplexity,
 																numberGenerator, addSubGenerator );
@@ -35,7 +35,7 @@ namespace MathExercisesGenerator.Tests
 		{
 			var gen = CreateExerciseGenerator( Complexities.AdditionSubtractionComplexity );
 
-			var op = gen.Generate();
+			var op = gen.Generate( new Range<int>( 0, 10 ) );
 
 			Assert.That( op, Is.InstanceOf<BinaryOperation<int>>() );
 		}
@@ -47,7 +47,7 @@ namespace MathExercisesGenerator.Tests
 		{
 			var gen = CreateExerciseGenerator( complexity );
 
-			var op = gen.Generate();
+			var op = gen.Generate( new Range<int>( 0, 10 ) );
 
 			Console.WriteLine( op );
 

@@ -1,26 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using JetBrains.Annotations;
+using Microsoft.FSharp.Math;
 
 namespace Generator.Core
 {
-	public static class GenerationContextExtensions
-	{
-		public static bool Passes<T>(this GenerationContext<T> context, Operation<T> operation )
-		{
-			foreach ( var constraint in context.Constraints)
-			{
-				bool passes = constraint.Passes(operation);
-				if ( !passes )
-				{
-					return false;
-				}
-			}
-
-			return true;
-		}
-	}
-
 	public sealed class GenerationContext<T>
 	{
 		private readonly double _maxComplexity;
@@ -28,12 +13,22 @@ namespace Generator.Core
 		private readonly IRandomNumberGenerator<double> _probabilityGenerator;
 		private readonly IRandomNumberGenerator<T> _numberGenerator;
 		private readonly IOperationGenerator<T> _parentGenerator;
-		private readonly Range<T> _range;
-		private readonly List<IConstraint<T>> _constraints = new List<IConstraint<T>>();
+		private readonly Range<T> _expressionRange;
 
-		public Range<T> Range
+		public Range<T> ExpressionRange
 		{
-			get { return _range; }
+			get { return _expressionRange; }
+		}
+
+		private static readonly INumeric<T> math = GlobalAssociations.GetNumericAssociation<T>();
+
+		private readonly Range<T> _termRange = new Range<T>( 
+			math.Parse( "1", NumberStyles.Number, CultureInfo.InvariantCulture ), 
+			math.Parse( "100", NumberStyles.Number, CultureInfo.InvariantCulture ) );
+
+		public Range<T> TermRange
+		{
+			get { return _termRange; }
 		}
 
 		public double MaxComplexity
@@ -56,11 +51,6 @@ namespace Generator.Core
 			get { return _parentGenerator; }
 		}
 
-		public List<IConstraint<T>> Constraints
-		{
-			get { return _constraints; }
-		}
-
 		public GenerationContext( IRandomNumberGenerator<double> probabilityGenerator, IRandomNumberGenerator<T> numberGenerator,
 								  IOperationGenerator<T> parentGenerator,
 								  double maxComplexity, [NotNull] Range<T> range )
@@ -68,7 +58,7 @@ namespace Generator.Core
 			if ( range == null ) throw new ArgumentNullException( "range" );
 
 			_maxComplexity = maxComplexity;
-			_range = range;
+			_expressionRange = range;
 			_parentGenerator = parentGenerator;
 			_probabilityGenerator = probabilityGenerator;
 			_numberGenerator = numberGenerator;
@@ -78,7 +68,14 @@ namespace Generator.Core
 		public GenerationContext<T> CloneWithMaxComplexity( double maxComplexity )
 		{
 			GenerationContext<T> clone = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, _parentGenerator,
-																  maxComplexity, _range );
+																  maxComplexity, _expressionRange );
+			return clone;
+		}
+
+		public GenerationContext<T> CloneWithRange( Range<T> range )
+		{
+			GenerationContext<T> clone = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, _parentGenerator, _maxComplexity, range );
+
 			return clone;
 		}
 	}

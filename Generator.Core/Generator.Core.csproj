@@ -60,6 +60,7 @@
     <Compile Include="IRandomNumberGenerator.cs" />
     <Compile Include="BracketsVisitor.cs" />
     <Compile Include="IVisitor.cs" />
+    <Compile Include="MathExtensions.cs" />
     <Compile Include="Number.cs" />
     <Compile Include="NumberGenerator.cs" />
     <Compile Include="Operation.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="ProbabilityGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomNumberGeneratorExtensions.cs" />
+    <Compile Include="Range.cs" />
     <Compile Include="SubtractOperation.cs" />
     <Compile Include="TermViewModel.cs" />
   </ItemGroup>

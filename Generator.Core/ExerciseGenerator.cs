@@ -56,11 +56,11 @@ namespace Generator.Core
 			return generator;
 		}
 
-		public Operation<T> Generate()
+		public Operation<T> Generate(Range<T> range )
 		{
 			// todo brinchuk this is a dirty hack!
 			var context = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, this, _maxComplexity,
-												   (Range<T>)(object)Range<T>.IntInfinite() );
+												   range );
 			var operation = Generate( context );
 			return operation;
 		}
