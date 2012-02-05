@@ -18,14 +18,16 @@ namespace MathExercisesGenerator
 			IntExerciseGenerator gen = new IntExerciseGenerator( new ProbabilityGenerator(), new IntRandomNumberGenerator(),
 																maxComplexity,
 																new NumberGenerator(),
-																new AdditionSubtractionBinaryOperationGenerator() );
+																new AdditionGenerator(),
+																new SubtractionGenerator() );
 
+			Range<int> range = new Range<int>( 1, 100 );
 			ConvertToLineVisitor visitor = new ConvertToLineVisitor();
 			BracketsVisitor bracketsVisitor = new BracketsVisitor();
 
 			for ( int i = 0; i < _exercisesCount; i++ )
 			{
-				var op = gen.Generate();
+				var op = gen.Generate( range );
 				var opWithBrackets = bracketsVisitor.VisitCore( op );
 				var terms = visitor.VisitCore( opWithBrackets );
 				_exercises.Add( new ExerciseViewModel( op, terms ) );

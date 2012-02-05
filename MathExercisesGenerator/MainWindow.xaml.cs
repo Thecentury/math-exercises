@@ -23,6 +23,11 @@ namespace MathExercisesGenerator
 		{
 			InitializeComponent();
 
+			Loaded += MainWindowLoaded;
+		}
+
+		private void MainWindowLoaded( object sender, RoutedEventArgs e )
+		{
 			ApplicationViewModel vm = new ApplicationViewModel();
 
 			DataContext = vm;

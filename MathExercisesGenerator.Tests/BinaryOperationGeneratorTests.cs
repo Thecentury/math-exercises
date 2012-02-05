@@ -26,12 +26,16 @@ namespace MathExercisesGenerator.Tests
 		private static void CreateAndAssertBinaryOp<T>( double rndMockValue )
 		{
 			Mock<IOperationGenerator<int>> parentMock = new Mock<IOperationGenerator<int>>();
-			parentMock.Setup( g => g.Generate( It.IsAny<GenerationContext<int>>() ) ).Returns( new Number( 0 ) );
+			parentMock.Setup( g => g.Generate( It.IsAny<GenerationContext<int>>() ) ).Returns( new Number( 1 ) );
 
 			Mock<IRandomNumberGenerator<double>> rndMock = new Mock<IRandomNumberGenerator<double>>();
 			rndMock.Setup( r => r.Generate( It.IsAny<Range<double>>() ) ).Returns( rndMockValue );
 
-			AdditionSubtractionBinaryOperationGenerator generator = new AdditionSubtractionBinaryOperationGenerator();
+			IOperationGenerator<int> generator =
+				(typeof( T ) == typeof( AddOperation ))
+					? (IOperationGenerator<int>)new AdditionGenerator()
+					: new SubtractionGenerator();
+
 			var context = new GenerationContext<int>( rndMock.Object, new Mock<IRandomNumberGenerator<int>>().Object,
 													 parentMock.Object, 1, new Range<int>( 0, 2 ) );
 			var op = generator.Generate( context );

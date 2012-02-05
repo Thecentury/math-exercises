@@ -1,28 +1,31 @@
 using System;
 using JetBrains.Annotations;
+using Microsoft.FSharp.Math;
 
 namespace Generator.Core
 {
-	public sealed class AdditionSubtractionBinaryOperationGenerator : IOperationGenerator<int>
+	public sealed class AdditionGenerator : IOperationGenerator<int>
 	{
 		public Operation<int> Generate( GenerationContext<int> context )
 		{
-			var operands = context.Generate( 2 );
-			var left = operands[0];
-			var right = operands[1];
+			double leftComplexity = context.ProbabilityGenerator.GetProbability() * context.MaxComplexity;
+			double rightComplexity = context.MaxComplexity - leftComplexity;
 
-			BinaryOperation<int> operation;
-			bool isAddition = context.ProbabilityGenerator.GetBool();
-			if ( isAddition )
-			{
-				operation = new AddOperation( left, right );
-			}
-			else
-			{
-				operation = new SubtractOperation( left, right );
-			}
+			Range<int> leftRange = new Range<int>( context.ExpressionRange.MinValue, context.ExpressionRange.MaxValue - 1 );
+			var left = context.ParentGenerator.Generate(
+				context
+				.CloneWithMaxComplexity( leftComplexity )
+				.CloneWithRange( leftRange ) );
 
-			return operation;
+			var leftValue = left.Evaluate();
+			Range<int> rightRange = context.TermRange.Intersect( context.ExpressionRange - leftValue );
+
+			var right = context.ParentGenerator.Generate(
+				context.CloneWithMaxComplexity( rightComplexity )
+					.CloneWithRange( rightRange ) );
+
+			var result = new AddOperation( left, right );
+			return result;
 		}
 
 		public double Complexity
@@ -31,26 +34,34 @@ namespace Generator.Core
 		}
 	}
 
-	public interface IConstraint<T>
+	public sealed class SubtractionGenerator : IOperationGenerator<int>
 	{
-		bool Passes( Operation<T> operation );
-	}
-
-	public sealed class InRangeConstraint<T> : IConstraint<T>
-	{
-		private readonly Range<T> _range;
-
-		public InRangeConstraint( [NotNull] Range<T> range )
+		public Operation<int> Generate( GenerationContext<int> context )
 		{
-			if ( range == null ) throw new ArgumentNullException( "range" );
-			_range = range;
+			double leftComplexity = context.ProbabilityGenerator.GetProbability() * context.MaxComplexity;
+			double rightComplexity = context.MaxComplexity - leftComplexity;
+
+			Range<int> leftRange = new Range<int>( context.ExpressionRange.MinValue, context.ExpressionRange.MaxValue );
+			var left = context.ParentGenerator.Generate(
+				context
+				.CloneWithMaxComplexity( leftComplexity )
+				.CloneWithRange( leftRange ) );
+
+			var leftValue = left.Evaluate();
+			Range<int> rightRange = context.TermRange.Intersect( Range.From( leftValue ) - context.ExpressionRange );
+			var right = context.ParentGenerator.Generate(
+				context.CloneWithMaxComplexity( rightComplexity )
+					.CloneWithRange( rightRange ) );
+
+			var rightValue = right.Evaluate();
+
+			var result = new SubtractOperation( left, right );
+			return result;
 		}
 
-		public bool Passes( Operation<T> operation )
+		public double Complexity
 		{
-			var value = operation.Evaluate();
-			bool passes = _range.Includes( value );
-			return passes;
+			get { return Complexities.AdditionSubtractionComplexity; }
 		}
 	}
 }
