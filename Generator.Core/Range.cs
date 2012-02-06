@@ -69,6 +69,13 @@ namespace Generator.Core
 		}
 
 		[Pure]
+		public static Range<T> operator +( Range<T> range1, Range<T> range2 )
+		{
+			Range<T> result = new Range<T>( math.Add( range1.MinValue, range2.MinValue ), math.Add( range1.MaxValue, range2.MaxValue ) );
+			return result;
+		}
+
+		[Pure]
 		public static Range<T> operator -( Range<T> range )
 		{
 			Range<T> result = new Range<T>( math.Subtract( math.Zero, range.MaxValue ), math.Subtract( math.Zero, range.MinValue ) );
@@ -83,7 +90,7 @@ namespace Generator.Core
 		}
 
 		[Pure]
-		public static Range<T> operator -( Range<T> range1, Range<T> range2  )
+		public static Range<T> operator -( Range<T> range1, Range<T> range2 )
 		{
 			Range<T> result = new Range<T>( math.Subtract( range1.MinValue, range2.MaxValue ), math.Subtract( range1.MaxValue, range2.MinValue ) );
 			return result;

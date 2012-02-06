@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Generator.Core;
@@ -32,7 +33,7 @@ namespace MathExercisesGenerator.Tests
 			rndMock.Setup( r => r.Generate( It.IsAny<Range<double>>() ) ).Returns( rndMockValue );
 
 			IOperationGenerator<int> generator =
-				(typeof( T ) == typeof( AddOperation ))
+				( typeof( T ) == typeof( AddOperation ) )
 					? (IOperationGenerator<int>)new AdditionGenerator()
 					: new SubtractionGenerator();
 
@@ -41,6 +42,45 @@ namespace MathExercisesGenerator.Tests
 			var op = generator.Generate( context );
 
 			Assert.That( op, Is.InstanceOf<T>() );
+		}
+
+		[Test]
+		public void ShouldCreateSubtractionForRangeOfOneInteger()
+		{
+			Mock<IOperationGenerator<int>> parentMock = new Mock<IOperationGenerator<int>>();
+			parentMock.Setup( g => g.Generate( It.IsAny<GenerationContext<int>>() ) ).Returns<GenerationContext<int>>( ctx => new Number( ctx.ExpressionRange.MaxValue ) );
+
+			Mock<IRandomNumberGenerator<double>> rndMock = new Mock<IRandomNumberGenerator<double>>();
+			rndMock.Setup( r => r.Generate( It.IsAny<Range<double>>() ) ).Returns( 0.5 );
+
+			var generator = new SubtractionGenerator();
+
+			const double complexity = 2;
+			var context = new GenerationContext<int>( rndMock.Object, new Mock<IRandomNumberGenerator<int>>().Object,
+													 parentMock.Object, complexity, new Range<int>( 2, 2 ) );
+			var op = generator.Generate( context );
+
+			Assert.NotNull( op );
+		}
+
+		[Test]
+		public void ShouldCreateAdditionForRangeOfOneInteger()
+		{
+			Mock<IOperationGenerator<int>> parentMock = new Mock<IOperationGenerator<int>>();
+			parentMock.Setup( g => g.Generate( It.IsAny<GenerationContext<int>>() ) )
+				.Returns<GenerationContext<int>>( ctx => new Number( ctx.ExpressionRange.MaxValue ) );
+
+			Mock<IRandomNumberGenerator<double>> rndMock = new Mock<IRandomNumberGenerator<double>>();
+			rndMock.Setup( r => r.Generate( It.IsAny<Range<double>>() ) ).Returns( 0.5 );
+
+			var generator = new AdditionGenerator();
+
+			const double complexity = 2;
+			var context = new GenerationContext<int>( rndMock.Object, new Mock<IRandomNumberGenerator<int>>().Object,
+													 parentMock.Object, complexity, new Range<int>( 2, 2 ) );
+			var op = generator.Generate( context );
+
+			Assert.NotNull( op );
 		}
 	}
 }
