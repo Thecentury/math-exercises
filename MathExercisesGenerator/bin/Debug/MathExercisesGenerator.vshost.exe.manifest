@@ -47,15 +47,8 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FSharp.PowerPack.dll" size="713728">
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
       <assemblyIdentity name="FSharp.PowerPack" version="2.0.0.0" publicKeyToken="A19089B1C74D0809" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>T7YXA2rkT1hnqZ6B2LwKTOCrpnM=</dsig:DigestValue>
-      </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
@@ -66,19 +59,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>DAYV5ofv1r52VmO40/ZSSyNB6bw=</dsig:DigestValue>
+        <dsig:DigestValue>ITC/y81eYDFt2W3fptJcfz+UqWk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MathExercisesGenerator.exe" size="24064">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MathExercisesGenerator.exe" size="23040">
       <assemblyIdentity name="MathExercisesGenerator" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>4vHbObGWdPyAqmlRy+zZ0/RPJgI=</dsig:DigestValue>
+        <dsig:DigestValue>b4bWDCDwqI31Rh67akwMfrBkrRA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

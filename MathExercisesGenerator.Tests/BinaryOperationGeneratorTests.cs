@@ -6,6 +6,7 @@ using System.Text;
 using Generator.Core;
 using Moq;
 using NUnit.Framework;
+using Range = Generator.Core.Range;
 
 namespace MathExercisesGenerator.Tests
 {
@@ -33,7 +34,7 @@ namespace MathExercisesGenerator.Tests
 			rndMock.Setup( r => r.Generate( It.IsAny<Range<double>>() ) ).Returns( rndMockValue );
 
 			IOperationGenerator<int> generator =
-				( typeof( T ) == typeof( AddOperation ) )
+				(typeof( T ) == typeof( AddOperation ))
 					? (IOperationGenerator<int>)new AdditionGenerator()
 					: new SubtractionGenerator();
 
@@ -47,20 +48,47 @@ namespace MathExercisesGenerator.Tests
 		[Test]
 		public void ShouldCreateSubtractionForRangeOfOneInteger()
 		{
+			const double complexity = 2;
+			var context = CreateMockContext( complexity, Range.Create( 2, 2 ) );
+
+			var generator = new SubtractionGenerator();
+			var op = generator.Generate( context );
+
+			Assert.NotNull( op );
+		}
+
+		private static GenerationContext<int> CreateMockContext( double complexity, Range<int> range )
+		{
 			Mock<IOperationGenerator<int>> parentMock = new Mock<IOperationGenerator<int>>();
-			parentMock.Setup( g => g.Generate( It.IsAny<GenerationContext<int>>() ) ).Returns<GenerationContext<int>>( ctx => new Number( ctx.ExpressionRange.MaxValue ) );
+			parentMock.Setup( g => g.Generate( It.IsAny<GenerationContext<int>>() ) ).Returns<GenerationContext<int>>(
+				ctx => new Number( ctx.ExpressionRange.MaxValue ) );
 
 			Mock<IRandomNumberGenerator<double>> rndMock = new Mock<IRandomNumberGenerator<double>>();
 			rndMock.Setup( r => r.Generate( It.IsAny<Range<double>>() ) ).Returns( 0.5 );
 
+
+			var context = new GenerationContext<int>( rndMock.Object, new Mock<IRandomNumberGenerator<int>>().Object,
+													 parentMock.Object, complexity, range );
+			return context;
+		}
+
+		[Test]
+		public void ShouldNotBeAbleToCreateASubtractionForNinetyNine()
+		{
+			var context = CreateMockContext( 2.0, Range.Create( 100, 100 ) );
 			var generator = new SubtractionGenerator();
 
-			const double complexity = 2;
-			var context = new GenerationContext<int>( rndMock.Object, new Mock<IRandomNumberGenerator<int>>().Object,
-													 parentMock.Object, complexity, new Range<int>( 2, 2 ) );
-			var op = generator.Generate( context );
+			Assert.That( generator.CanGenerate( context ), Is.False );
+		}
 
-			Assert.NotNull( op );
+		[Test]
+		public void ShouldNotBeAbleToCreateAnAdditionForOneOne()
+		{
+			var context = CreateMockContext( 2.0, Range.Create( 1, 1 ) );
+
+			var generator = new AdditionGenerator();
+
+			Assert.That( generator.CanGenerate( context ), Is.False );
 		}
 
 		[Test]
