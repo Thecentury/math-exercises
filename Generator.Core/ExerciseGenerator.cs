@@ -62,7 +62,7 @@ namespace Generator.Core
 		public Operation<T> Generate( Range<T> range )
 		{
 			var context = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, this, _maxComplexity,
-												   range );
+												   range, range );
 			var operation = Generate( context );
 			return operation;
 		}
