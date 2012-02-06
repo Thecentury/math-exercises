@@ -20,11 +20,7 @@ namespace Generator.Core
 			get { return _expressionRange; }
 		}
 
-		private static readonly INumeric<T> math = GlobalAssociations.GetNumericAssociation<T>();
-
-		private readonly Range<T> _termRange = new Range<T>( 
-			math.Parse( "1", NumberStyles.Number, CultureInfo.InvariantCulture ), 
-			math.Parse( "100", NumberStyles.Number, CultureInfo.InvariantCulture ) );
+		private readonly Range<T> _termRange;
 
 		public Range<T> TermRange
 		{
@@ -53,12 +49,17 @@ namespace Generator.Core
 
 		public GenerationContext( IRandomNumberGenerator<double> probabilityGenerator, IRandomNumberGenerator<T> numberGenerator,
 								  IOperationGenerator<T> parentGenerator,
-								  double maxComplexity, [NotNull] Range<T> range )
+								  double maxComplexity,
+			[NotNull] Range<T> range,
+			[NotNull] Range<T> termRange
+			)
 		{
 			if ( range == null ) throw new ArgumentNullException( "range" );
+			if ( termRange == null ) throw new ArgumentNullException( "termRange" );
 
 			_maxComplexity = maxComplexity;
 			_expressionRange = range;
+			_termRange = termRange;
 			_parentGenerator = parentGenerator;
 			_probabilityGenerator = probabilityGenerator;
 			_numberGenerator = numberGenerator;
@@ -68,13 +69,13 @@ namespace Generator.Core
 		public GenerationContext<T> CloneWithMaxComplexity( double maxComplexity )
 		{
 			GenerationContext<T> clone = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, _parentGenerator,
-																  maxComplexity, _expressionRange );
+																  maxComplexity, _expressionRange, _termRange );
 			return clone;
 		}
 
 		public GenerationContext<T> CloneWithRange( Range<T> range )
 		{
-			GenerationContext<T> clone = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, _parentGenerator, _maxComplexity, range );
+			GenerationContext<T> clone = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, _parentGenerator, _maxComplexity, range, _termRange );
 
 			return clone;
 		}

@@ -59,7 +59,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ITC/y81eYDFt2W3fptJcfz+UqWk=</dsig:DigestValue>
+        <dsig:DigestValue>RkmM1ePrGEllFkGc5sQxbZn34Oc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -71,17 +71,17 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>b4bWDCDwqI31Rh67akwMfrBkrRA=</dsig:DigestValue>
+        <dsig:DigestValue>aUvf4KyYc8+4m1wA2YLzohvHtI8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="MathExercisesGenerator.exe.config" size="1199">
+  <file name="MathExercisesGenerator.exe.config" size="1203">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>38sqi9m2Az4TFxbcIJDw+TYzTeM=</dsig:DigestValue>
+      <dsig:DigestValue>4lAQc4CRYLPVMV/WzH2x8r/UlpI=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

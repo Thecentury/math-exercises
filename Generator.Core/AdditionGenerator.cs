@@ -11,7 +11,7 @@ namespace Generator.Core
 			double leftComplexity = context.ProbabilityGenerator.GetProbability() * context.MaxComplexity;
 			double rightComplexity = context.MaxComplexity - leftComplexity;
 
-			Range<int> leftRange = context.TermRange.Intersect( context.ExpressionRange - new Range<int>( 1, 1 ) );
+			Range<int> leftRange = context.TermRange.Intersect( context.ExpressionRange - context.TermRange );
 			var left = context.ParentGenerator.Generate(
 				context
 				.CloneWithMaxComplexity( leftComplexity )
