@@ -23,6 +23,16 @@ namespace Generator.Core
 			return result;
 		}
 
+		public override bool CanGenerate( GenerationContext<int> context )
+		{
+			if ( context.ExpressionRange.MinValue >= context.TermRange.MaxValue )
+			{
+				return false;
+			}
+
+			return base.CanGenerate( context );
+		}
+
 		public override double Complexity
 		{
 			get { return Complexities.AdditionSubtractionComplexity; }
