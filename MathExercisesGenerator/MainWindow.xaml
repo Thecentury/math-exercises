@@ -50,6 +50,7 @@
 						VerticalAlignment="Center"
 						HorizontalAlignment="Right"
 						Margin="10,10,3,10"
+						Focusable="False"
 						Style="{StaticResource textStyle}">
 				<ItemsControl ItemsSource="{Binding Terms}">
 					<ItemsControl.ItemsPanel>
@@ -58,15 +59,39 @@
 						</ItemsPanelTemplate>
 					</ItemsControl.ItemsPanel>
 				</ItemsControl>
-				<TextBlock Margin="4,0,0,0"
-						   >=</TextBlock>
+				<TextBlock Margin="4,0,0,0">
+					=
+				</TextBlock>
 			</StackPanel>
 		</DataTemplate>
 
 		<DataTemplate DataType="{x:Type MathExercisesGenerator:ExerciseViewModel}" x:Key="answer">
-			<TextBox Text="{Binding UserValue, Mode=TwoWay, UpdateSourceTrigger=Default}" 
+			<TextBox Text="{Binding UserValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
 					 MinWidth="25"
+					 FontSize="20"
+					 VerticalAlignment="Center"
 					 VerticalContentAlignment="Center"/>
+		</DataTemplate>
+		
+		<DataTemplate DataType="{x:Type MathExercisesGenerator:ExerciseViewModel}" x:Key="isCorrectTemplate">
+			<Image>
+				<Image.Style>
+					<Style TargetType="Image">
+						<Setter Property="Margin" Value="4"/>
+						<Setter Property="Stretch" Value="None"/>
+						<Setter Property="Focusable" Value="False"/>
+						
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding IsCorrect}" Value="True">
+								<Setter Property="Source" Value="tick.png"/>
+							</DataTrigger>
+							<DataTrigger Binding="{Binding IsIncorrect}" Value="True">
+								<Setter Property="Source" Value="cross.png"/>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Image.Style>
+			</Image>
 		</DataTemplate>
 		
 		<Style TargetType="DataGridRow" x:Key="rowStyle">
@@ -110,7 +135,7 @@
 			<DataGrid.Columns>
 				<DataGridTemplateColumn CellTemplate="{StaticResource ResourceKey=terms}"/>
 				<DataGridTemplateColumn CellTemplate="{StaticResource ResourceKey=answer}"/>
-
+				<DataGridTemplateColumn CellTemplate="{StaticResource ResourceKey=isCorrectTemplate}"/>
 				<DataGridTextColumn Binding="{Binding CorrectValue, Mode=OneWay}"/>
 			</DataGrid.Columns>
 		</DataGrid>

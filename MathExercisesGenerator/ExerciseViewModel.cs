@@ -29,8 +29,13 @@ namespace MathExercisesGenerator
 			get { return CorrectValue == UserValue; }
 		}
 
-		private int _userValue;
-		public int UserValue
+		public bool IsIncorrect
+		{
+			get { return _userValue.HasValue && CorrectValue != UserValue; }
+		}
+
+		private int? _userValue;
+		public int? UserValue
 		{
 			get { return _userValue; }
 			set
@@ -38,6 +43,7 @@ namespace MathExercisesGenerator
 				_userValue = value;
 				RaisePropertyChanged( "UserValue" );
 				RaisePropertyChanged( "IsCorrect" );
+				RaisePropertyChanged( "IsIncorrect" );
 			}
 		}
 	}
