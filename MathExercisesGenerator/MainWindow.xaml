@@ -70,7 +70,21 @@
 		</DataTemplate>
 		
 		<Style TargetType="DataGridRow" x:Key="rowStyle">
+			<Style.Resources>
+				<!-- SelectedItem with focus -->
+				<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+				<!-- SelectedItem without focus -->
+				<SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
+				<!-- SelectedItem text foreground -->
+				<SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+			</Style.Resources>
+			
 			<Setter Property="Background" Value="{x:Null}"/>
+			<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+		</Style>
+		
+		<Style TargetType="DataGridCell" x:Key="cellStyle">
+			<Setter Property="BorderBrush" Value="{x:Null}"/>
 		</Style>
 
 	</Window.Resources>
@@ -91,6 +105,7 @@
 				  HeadersVisibility="None"
 				  Background="{x:Null}"
 				  RowStyle="{StaticResource rowStyle}"
+				  CellStyle="{StaticResource cellStyle}"
 				  >
 			<DataGrid.Columns>
 				<DataGridTemplateColumn CellTemplate="{StaticResource ResourceKey=terms}"/>

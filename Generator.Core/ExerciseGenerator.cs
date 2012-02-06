@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace Generator.Core
 {
-	public class ExerciseGenerator<T> : IOperationGenerator<T>
+	public class ExerciseGenerator<T> : OperationGeneratorBase<T>
 	{
 		private readonly IRandomNumberGenerator<double> _probabilityGenerator;
 		private readonly IRandomNumberGenerator<T> _numberGenerator;
@@ -27,7 +27,7 @@ namespace Generator.Core
 			_generators.AddRange( generators );
 		}
 
-		public Operation<T> Generate( GenerationContext<T> context )
+		public override Operation<T> Generate( GenerationContext<T> context )
 		{
 			var generator = GetSuitableGenerator( context );
 
@@ -37,7 +37,10 @@ namespace Generator.Core
 
 		private IOperationGenerator<T> GetSuitableGenerator( GenerationContext<T> context )
 		{
-			var acceptedGenerators = _generators.Where( g => g.Complexity <= context.MaxComplexity ).ToList();
+			var acceptedGenerators = _generators.Where( g =>
+					g.Complexity <= context.MaxComplexity &&
+					g.CanGenerate( context ))
+				.ToList();
 
 			double weightsSum = acceptedGenerators.Sum( g => g.GetWeight() );
 			double probability = _probabilityGenerator.GetProbability() * weightsSum;
@@ -56,16 +59,15 @@ namespace Generator.Core
 			return generator;
 		}
 
-		public Operation<T> Generate(Range<T> range )
+		public Operation<T> Generate( Range<T> range )
 		{
-			// todo brinchuk this is a dirty hack!
 			var context = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, this, _maxComplexity,
 												   range );
 			var operation = Generate( context );
 			return operation;
 		}
 
-		public double Complexity
+		public override double Complexity
 		{
 			get { throw new NotSupportedException(); }
 		}

@@ -1,14 +1,14 @@
 namespace Generator.Core
 {
-	public sealed class NumberGenerator : IOperationGenerator<int>
+	public sealed class NumberGenerator : OperationGeneratorBase<int>
 	{
-		public Operation<int> Generate( GenerationContext<int> context )
+		public override Operation<int> Generate( GenerationContext<int> context )
 		{
 			int value = context.NextValue();
 			return new Number( value );
 		}
 
-		public double Complexity
+		public override double Complexity
 		{
 			get { return Complexities.NumberComplexity; }
 		}
