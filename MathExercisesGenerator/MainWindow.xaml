@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Core="clr-namespace:Generator.Core;assembly=Generator.Core"
         xmlns:MathExercisesGenerator="clr-namespace:MathExercisesGenerator" 
-		Title="MainWindow" SizeToContent="WidthAndHeight">
+		Title="Примеры" SizeToContent="WidthAndHeight" Icon="counter.png"
+		ResizeMode="NoResize">
 
 	<Window.Resources>
 
