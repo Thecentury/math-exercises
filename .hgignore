@@ -6,3 +6,5 @@ _ReSharper.*
 *.DotSettings.user
 *.ncrunch*
 *.crunchsolution.cache
+*.csproj.user
+publish/*

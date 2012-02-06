@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Generator.Core;
+using MathExercisesGenerator.Properties;
 
 namespace MathExercisesGenerator
 {
@@ -28,9 +30,23 @@ namespace MathExercisesGenerator
 
 		private void MainWindowLoaded( object sender, RoutedEventArgs e )
 		{
-			ApplicationViewModel vm = new ApplicationViewModel();
+			CreateExamples();
+		}
+
+		private void CreateExamples()
+		{
+			var settings = Settings.Default;
+
+			ApplicationViewModel vm = new ApplicationViewModel(
+				Range.Create( settings.MinValue, settings.MaxValue ),
+				settings.ExercisesCount, settings.Complexity );
 
 			DataContext = vm;
+		}
+
+		private void MoreExercisesButtonClick( object sender, RoutedEventArgs e )
+		{
+			CreateExamples();
 		}
 	}
 }

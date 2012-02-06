@@ -11,6 +11,11 @@ namespace Generator.Core
 		{
 			return new Range<T>( value, value );
 		}
+
+		public static Range<T> Create<T>( T minValue, T maxValue )
+		{
+			return new Range<T>( minValue, maxValue );
+		}
 	}
 
 	[DebuggerDisplay( "{_minValue} - {_maxValue}" )]
