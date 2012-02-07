@@ -1,7 +1,6 @@
 using System.ComponentModel;
-using Generator.Core;
 
-namespace MathExercisesGenerator
+namespace Generator.Core
 {
 	public abstract class BindingObject : INotifyPropertyChanged
 	{

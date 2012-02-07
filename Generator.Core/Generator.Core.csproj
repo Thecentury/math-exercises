@@ -49,11 +49,14 @@
     <Compile Include="AdditionGenerator.cs" />
     <Compile Include="AddOperation.cs" />
     <Compile Include="BinaryOperation.cs" />
+    <Compile Include="BindingObject.cs" />
     <Compile Include="Brackets.cs" />
     <Compile Include="CodeAnnotations.cs" />
     <Compile Include="Complexities.cs" />
     <Compile Include="ComplexityGeneratorWrapper.cs" />
     <Compile Include="ConvertToLineVisitor.cs" />
+    <Compile Include="ConvertToOperationViewModelVisitor.cs" />
+    <Compile Include="EventExtensions.cs" />
     <Compile Include="ExerciseGenerator.cs" />
     <Compile Include="GenerationContext.cs" />
     <Compile Include="GeneratorContextExtensions.cs" />
@@ -67,6 +70,7 @@
     <Compile Include="Number.cs" />
     <Compile Include="NumberGenerator.cs" />
     <Compile Include="Operation.cs" />
+    <Compile Include="OperationViewModel.cs" />
     <Compile Include="OperatorGeneratorExtensions.cs" />
     <Compile Include="ProbabilityGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
