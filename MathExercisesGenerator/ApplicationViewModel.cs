@@ -17,7 +17,8 @@ namespace MathExercisesGenerator
 																maxComplexity,
 																new NumberGenerator(),
 																new AdditionGenerator(),
-																new SubtractionGenerator() );
+																new IntComplexityGeneratorWrapper( new SubtractionGenerator(), 2 )
+																);
 
 			ConvertToLineVisitor visitor = new ConvertToLineVisitor();
 			BracketsVisitor bracketsVisitor = new BracketsVisitor();

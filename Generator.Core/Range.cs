@@ -18,7 +18,7 @@ namespace Generator.Core
 		}
 	}
 
-	[DebuggerDisplay( "{_minValue} - {_maxValue}" )]
+	[DebuggerDisplay( "{_minValue} — {_maxValue}" )]
 	public sealed class Range<T>
 	{
 		private static readonly INumeric<T> math = GlobalAssociations.GetNumericAssociation<T>();
@@ -108,6 +108,22 @@ namespace Generator.Core
 			T maxValue = math.Min( _maxValue, other._maxValue );
 
 			return new Range<T>( minValue, maxValue );
+		}
+
+		[Pure]
+		public bool IntersectsWith( Range<T> other )
+		{
+			bool intersects =
+				( math.Compare( other.MinValue, this._minValue ) <= 0 &&
+				 math.Compare( this._minValue, other._maxValue ) <= 0 ) ||
+				( math.Compare( other.MinValue, this._maxValue ) <= 0 &&
+				 math.Compare( this._minValue, other._maxValue ) <= 0 ) ||
+				 ( math.Compare( this._minValue, other._minValue ) <= 0 &&
+				 math.Compare( other._minValue, this._maxValue ) <= 0 ) ||
+				 ( math.Compare( this._minValue, other._maxValue ) <= 0 &&
+				 math.Compare( other._maxValue, this._maxValue ) <= 0 );
+
+			return intersects;
 		}
 	}
 }
