@@ -23,39 +23,51 @@ namespace MathExercisesGenerator.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int MinValue {
-            get {
-                return ((int)(this["MinValue"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public int MaxValue {
             get {
                 return ((int)(this["MaxValue"]));
             }
+            set {
+                this["MaxValue"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int MinValue {
+            get {
+                return ((int)(this["MinValue"]));
+            }
+            set {
+                this["MinValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2.2")]
         public double Complexity {
             get {
                 return ((double)(this["Complexity"]));
             }
+            set {
+                this["Complexity"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int ExercisesCount {
             get {
                 return ((int)(this["ExercisesCount"]));
+            }
+            set {
+                this["ExercisesCount"] = value;
             }
         }
     }

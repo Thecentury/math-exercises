@@ -32,6 +32,7 @@ namespace Generator.Core
 
 			bool differenceOfTwoTermsIntersectsWithExpressionRange =
 				(context.TermRange - context.TermRange).IntersectsWith(context.ExpressionRange);
+
 			if ( !differenceOfTwoTermsIntersectsWithExpressionRange )
 			{
 				return false;
