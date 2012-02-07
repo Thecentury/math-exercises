@@ -49,6 +49,7 @@
     <Compile Include="AdditionGenerator.cs" />
     <Compile Include="AddOperation.cs" />
     <Compile Include="BinaryOperation.cs" />
+    <Compile Include="Brackets.cs" />
     <Compile Include="CodeAnnotations.cs" />
     <Compile Include="Complexities.cs" />
     <Compile Include="ComplexityGeneratorWrapper.cs" />

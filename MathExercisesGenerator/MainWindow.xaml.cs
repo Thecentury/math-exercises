@@ -48,5 +48,14 @@ namespace MathExercisesGenerator
 		{
 			CreateExamples();
 		}
+
+		private void WindowKeyDown( object sender, KeyEventArgs e )
+		{
+			if ( e.Key == Key.F1 )
+			{
+				SettingsEditor editor = new SettingsEditor {DataContext = Settings.Default};
+				editor.ShowDialog();
+			}
+		}
 	}
 }

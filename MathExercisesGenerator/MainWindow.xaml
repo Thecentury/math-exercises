@@ -4,7 +4,8 @@
         xmlns:Core="clr-namespace:Generator.Core;assembly=Generator.Core"
         xmlns:MathExercisesGenerator="clr-namespace:MathExercisesGenerator" 
 		Title="Примеры" SizeToContent="WidthAndHeight" Icon="counter.png"
-		ResizeMode="NoResize">
+		ResizeMode="NoResize"
+		KeyDown="WindowKeyDown">
 
 	<Window.Resources>
 
@@ -115,7 +116,7 @@
 			<Setter Property="BorderBrush" Value="{x:Null}"/>
 			<Setter Property="IsTabStop" Value="False"/>
 		</Style>
-		
+
 		<BooleanToVisibilityConverter x:Key="boolToVisibilityConverter"/>
 
 	</Window.Resources>
@@ -131,7 +132,7 @@
 					Click="MoreExercisesButtonClick">
 				Еще примеры!
 			</Button>
-			
+
 			<DataGrid ItemsSource="{Binding Exercises}" 
 				  HorizontalAlignment="Center"
 				  BorderBrush="{x:Null}"

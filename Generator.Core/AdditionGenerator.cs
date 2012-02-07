@@ -42,6 +42,7 @@ namespace Generator.Core
 
 			bool twoTermsIntersectsWithExpressionRange =
 				( context.TermRange + context.TermRange ).IntersectsWith( context.ExpressionRange );
+
 			if ( !twoTermsIntersectsWithExpressionRange )
 			{
 				return false;

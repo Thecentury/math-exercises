@@ -59,36 +59,36 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Generator.Core.dll" size="26112">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Generator.Core.dll" size="26624">
       <assemblyIdentity name="Generator.Core" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>RmY0aPfJMFsAWk0DKs5qCdqLZ1I=</dsig:DigestValue>
+        <dsig:DigestValue>rHt1WoWE29U8OfSUDK/BRJZDB3k=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MathExercisesGenerator.exe" size="23040">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MathExercisesGenerator.exe" size="27136">
       <assemblyIdentity name="MathExercisesGenerator" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>IV0mkM4IPI/WJthYDMahL3FQTG4=</dsig:DigestValue>
+        <dsig:DigestValue>7S0znFMLdw/ZiH/PtmerfzmK3QY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="MathExercisesGenerator.exe.config" size="1203">
+  <file name="MathExercisesGenerator.exe.config" size="1215">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>xTeAZ8zB51CEafqru5NfqULpYec=</dsig:DigestValue>
+      <dsig:DigestValue>Pv6KDo/NHpTUcynHKzQyj+PEw/o=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
