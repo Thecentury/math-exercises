@@ -55,6 +55,8 @@ namespace MathExercisesGenerator
 			{
 				SettingsEditor editor = new SettingsEditor {DataContext = Settings.Default};
 				editor.ShowDialog();
+
+				CreateExamples();
 			}
 		}
 	}
