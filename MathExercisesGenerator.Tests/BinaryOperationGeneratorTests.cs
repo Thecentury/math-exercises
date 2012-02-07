@@ -34,7 +34,7 @@ namespace MathExercisesGenerator.Tests
 			rndMock.Setup( r => r.Generate( It.IsAny<Range<double>>() ) ).Returns( rndMockValue );
 
 			IOperationGenerator<int> generator =
-				(typeof( T ) == typeof( AddOperation ))
+				( typeof( T ) == typeof( AddOperation ) )
 					? (IOperationGenerator<int>)new AdditionGenerator()
 					: new SubtractionGenerator();
 
@@ -85,9 +85,31 @@ namespace MathExercisesGenerator.Tests
 		[Test]
 		public void ShouldNotBeAbleToCreateAnAdditionForOneOne()
 		{
-			var context = CreateMockContext( 2.0, Range.Create( 1, 1 ), Range.Create( 1, 100 ) );
+			var context = CreateMockContext( 2.0, expressionRange: Range.Create( 1, 1 ), termRange: Range.Create( 1, 100 ) );
 
 			var generator = new AdditionGenerator();
+
+			Assert.That( generator.CanGenerate( context ), Is.False );
+		}
+
+		[TestCase( 1, 1 )]
+		[TestCase( 10, 10 )]
+		public void ShouldNotBeAbleToCreateAddition( int termMin, int termMax )
+		{
+			var context = CreateMockContext( 2.0, expressionRange: Range.Create( 3, 10 ), termRange: Range.Create( termMin, termMax ) );
+
+			var generator = new AdditionGenerator();
+
+			Assert.That( generator.CanGenerate( context ), Is.False );
+		}
+
+		[TestCase( 1, 1 )]
+		[TestCase( 100, 100 )]
+		public void ShouldNotBeAbleToCreateSubtraction( int termMin, int termMax )
+		{
+			var context = CreateMockContext( 2.0, expressionRange: Range.Create( 3, 10 ), termRange: Range.Create( termMin, termMax ) );
+
+			var generator = new SubtractionGenerator();
 
 			Assert.That( generator.CanGenerate( context ), Is.False );
 		}

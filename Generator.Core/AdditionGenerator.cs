@@ -40,6 +40,13 @@ namespace Generator.Core
 				return false;
 			}
 
+			bool twoTermsIntersectsWithExpressionRange =
+				( context.TermRange + context.TermRange ).IntersectsWith( context.ExpressionRange );
+			if ( !twoTermsIntersectsWithExpressionRange )
+			{
+				return false;
+			}
+
 			return base.CanGenerate( context );
 		}
 	}

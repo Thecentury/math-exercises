@@ -37,6 +37,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +51,7 @@
     <Compile Include="BinaryOperation.cs" />
     <Compile Include="CodeAnnotations.cs" />
     <Compile Include="Complexities.cs" />
+    <Compile Include="ComplexityGeneratorWrapper.cs" />
     <Compile Include="ConvertToLineVisitor.cs" />
     <Compile Include="ExerciseGenerator.cs" />
     <Compile Include="GenerationContext.cs" />
