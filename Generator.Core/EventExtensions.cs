@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace MathExercisesGenerator
+namespace Generator.Core
 {
 	public static class EventExtensions
 	{
