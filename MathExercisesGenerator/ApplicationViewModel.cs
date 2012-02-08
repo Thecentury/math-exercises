@@ -24,7 +24,7 @@ namespace MathExercisesGenerator
 																new IntegralPositiveMultiplicationGenerator()
 																);
 
-			gen.CustomConstraints.Add( new MaxDepthConstraint<int>( 3 ) );
+			//gen.CustomConstraints.Add( new MaxDepthConstraint<int>( 3 ) );
 
 			ConvertToLineVisitor<int> visitor = new ConvertToLineVisitor<int>();
 			BracketsVisitor bracketsVisitor = new BracketsVisitor();
