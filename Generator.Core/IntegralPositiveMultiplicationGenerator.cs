@@ -27,7 +27,7 @@ namespace Generator.Core
 
 		public override double Complexity
 		{
-			get { return Complexities.NumberComplexity; }
+			get { return Complexities.MultiplicationComplexity; }
 		}
 	}
 }

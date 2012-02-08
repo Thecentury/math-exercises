@@ -31,6 +31,17 @@ namespace Generator.Core
 			return list;
 		}
 
+		private List<TermViewModel> Visit( MultiplyOperation<T> op )
+		{
+			List<TermViewModel> list = new List<TermViewModel>();
+
+			list.AddRange( VisitCore( op.Left ) );
+			list.Add( new MultiplicationViewModel() );
+			list.AddRange( VisitCore( op.Right ) );
+
+			return list;
+		}
+
 		private List<TermViewModel> Visit( Brackets brackets )
 		{
 			List<TermViewModel> list = new List<TermViewModel>();
