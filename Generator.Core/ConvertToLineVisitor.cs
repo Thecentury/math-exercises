@@ -2,14 +2,14 @@ using System.Collections.Generic;
 
 namespace Generator.Core
 {
-	public sealed class ConvertToLineVisitor : IVisitor<List<TermViewModel>>
+	public sealed class ConvertToLineVisitor<T> : IVisitor<List<TermViewModel>>
 	{
 		private List<TermViewModel> Visit( Number number )
 		{
 			return Single( new NumberViewModel( number.Text ) );
 		}
 
-		private List<TermViewModel> Visit( SubtractOperation op )
+		private List<TermViewModel> Visit( SubtractOperation<T> op )
 		{
 			List<TermViewModel> list = new List<TermViewModel>();
 
@@ -20,7 +20,7 @@ namespace Generator.Core
 			return list;
 		}
 
-		private List<TermViewModel> Visit( AddOperation op )
+		private List<TermViewModel> Visit( AddOperation<T> op )
 		{
 			List<TermViewModel> list = new List<TermViewModel>();
 

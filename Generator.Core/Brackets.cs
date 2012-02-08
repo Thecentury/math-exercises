@@ -24,6 +24,11 @@ namespace Generator.Core
 			}
 		}
 
+		public override double Priority
+		{
+			get { return (int) OperationPriority.Brackets; }
+		}
+
 		public Operation<int> Inner
 		{
 			get { return _inner; }

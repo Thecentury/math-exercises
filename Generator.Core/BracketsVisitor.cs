@@ -8,16 +8,26 @@ namespace Generator.Core
 	{
 		private Operation<int> Visit( BinaryOperation<int> op )
 		{
-			var right = op.Right;
-			if ( right is BinaryOperation<int> )
+			bool needAddBracketsLeft = op.Priority > op.Left.Priority;
+			bool needAddBracketsRight = op.Priority >= op.Right.Priority;
+
+			Operation<int> left = VisitCore( op.Left );
+			if ( needAddBracketsLeft )
 			{
-				var clone = op.CloneCore();
-				clone.Left = VisitCore( op.Left );
-				clone.Right = new Brackets( VisitCore( right ) );
-				return clone;
+				left = new Brackets( left );
+			}
+			Operation<int> right = VisitCore( op.Right );
+
+			if ( needAddBracketsRight )
+			{
+				right = new Brackets( right );
 			}
 
-			return op;
+			var clone = op.CloneCore();
+			clone.Left = left;
+			clone.Right = right;
+
+			return clone;
 		}
 
 		private Operation<int> Visit( Operation<int> op )

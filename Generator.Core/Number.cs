@@ -20,5 +20,10 @@ namespace Generator.Core
 		{
 			get { return _value.ToString( CultureInfo.InvariantCulture ); }
 		}
+
+		public override double Priority
+		{
+			get { return (int) OperationPriority.Number; }
+		}
 	}
 }
