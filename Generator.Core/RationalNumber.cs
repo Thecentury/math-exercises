@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
+using Microsoft.FSharp.Math;
 
 namespace Generator.Core
 {
 	public sealed class RationalNumber : IEquatable<RationalNumber>, IComparable<RationalNumber>
 	{
+		static RationalNumber()
+		{
+			GlobalAssociations.RegisterNumericAssociation( new RationalNumberMath() );
+		}
+
+		private static readonly RationalNumber zero = new RationalNumber( 0, 1 );
+		private static readonly RationalNumber one = new RationalNumber( 1, 1 );
+
 		private readonly int _nominator;
 		private readonly int _denominator;
 
@@ -18,8 +27,8 @@ namespace Generator.Core
 
 			if ( _denominator < 0 )
 			{
-				_denominator = -_denominator;
 				_nominator = -_nominator;
+				_denominator = -_denominator;
 			}
 		}
 
@@ -31,6 +40,16 @@ namespace Generator.Core
 		public int Denominator
 		{
 			get { return _denominator; }
+		}
+
+		public static RationalNumber Zero
+		{
+			get { return zero; }
+		}
+
+		public static RationalNumber One
+		{
+			get { return one; }
 		}
 
 		public static RationalNumber Parse( [NotNull] string str )
@@ -97,6 +116,11 @@ namespace Generator.Core
 					return min;
 				}
 			} while ( true );
+		}
+
+		public RationalNumber Abs()
+		{
+			return new RationalNumber( Math.Abs( _nominator ), _denominator );
 		}
 
 		#region Operators
