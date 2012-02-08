@@ -55,8 +55,10 @@
     <Compile Include="BinaryOperationGeneratorTests.cs" />
     <Compile Include="BracketsVisitorTests.cs" />
     <Compile Include="ExerciseGeneratorTests.cs" />
+    <Compile Include="IntegralMultiplicationGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangeTests.cs" />
+    <Compile Include="RationalNumberTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

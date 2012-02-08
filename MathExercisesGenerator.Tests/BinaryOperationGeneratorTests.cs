@@ -35,8 +35,8 @@ namespace MathExercisesGenerator.Tests
 
 			IOperationGenerator<int> generator =
 				( typeof( T ) == typeof( AddOperation<int> ) )
-					? (IOperationGenerator<int>)new AdditionGenerator()
-					: new SubtractionGenerator();
+					? (IOperationGenerator<int>)new IntergralAdditionGenerator()
+					: new IntegralSubtractionGenerator();
 
 			var range = Range.Create( 0, 2 );
 			var context = new GenerationContext<int>( rndMock.Object, new Mock<IRandomNumberGenerator<int>>().Object,
@@ -52,13 +52,13 @@ namespace MathExercisesGenerator.Tests
 			const double complexity = 2;
 			var context = CreateMockContext( complexity, Range.Create( 2, 2 ), Range.Create( 1, 100 ) );
 
-			var generator = new SubtractionGenerator();
+			var generator = new IntegralSubtractionGenerator();
 			var op = generator.Generate( context );
 
 			Assert.NotNull( op );
 		}
 
-		private static GenerationContext<int> CreateMockContext( double complexity, Range<int> expressionRange, Range<int> termRange )
+		protected static GenerationContext<int> CreateMockContext( double complexity, Range<int> expressionRange, Range<int> termRange )
 		{
 			Mock<IOperationGenerator<int>> parentMock = new Mock<IOperationGenerator<int>>();
 			parentMock.Setup( g => g.Generate( It.IsAny<GenerationContext<int>>() ) ).Returns<GenerationContext<int>>(
@@ -77,7 +77,7 @@ namespace MathExercisesGenerator.Tests
 		public void ShouldNotBeAbleToCreateASubtractionForOneHundred()
 		{
 			var context = CreateMockContext( 2.0, Range.Create( 100, 100 ), Range.Create( 1, 100 ) );
-			var generator = new SubtractionGenerator();
+			var generator = new IntegralSubtractionGenerator();
 
 			Assert.That( generator.CanGenerate( context ), Is.False );
 		}
@@ -87,7 +87,7 @@ namespace MathExercisesGenerator.Tests
 		{
 			var context = CreateMockContext( 2.0, expressionRange: Range.Create( 1, 1 ), termRange: Range.Create( 1, 100 ) );
 
-			var generator = new AdditionGenerator();
+			var generator = new IntergralAdditionGenerator();
 
 			Assert.That( generator.CanGenerate( context ), Is.False );
 		}
@@ -98,7 +98,7 @@ namespace MathExercisesGenerator.Tests
 		{
 			var context = CreateMockContext( 2.0, expressionRange: Range.Create( 3, 10 ), termRange: Range.Create( termMin, termMax ) );
 
-			var generator = new AdditionGenerator();
+			var generator = new IntergralAdditionGenerator();
 
 			Assert.That( generator.CanGenerate( context ), Is.False );
 		}
@@ -109,7 +109,7 @@ namespace MathExercisesGenerator.Tests
 		{
 			var context = CreateMockContext( 2.0, expressionRange: Range.Create( 3, 10 ), termRange: Range.Create( termMin, termMax ) );
 
-			var generator = new SubtractionGenerator();
+			var generator = new IntegralSubtractionGenerator();
 
 			Assert.That( generator.CanGenerate( context ), Is.False );
 		}
@@ -124,7 +124,7 @@ namespace MathExercisesGenerator.Tests
 			Mock<IRandomNumberGenerator<double>> rndMock = new Mock<IRandomNumberGenerator<double>>();
 			rndMock.Setup( r => r.Generate( It.IsAny<Range<double>>() ) ).Returns( 0.5 );
 
-			var generator = new AdditionGenerator();
+			var generator = new IntergralAdditionGenerator();
 
 			const double complexity = 2;
 			var range = new Range<int>( 2, 2 );

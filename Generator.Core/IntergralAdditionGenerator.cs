@@ -1,10 +1,9 @@
-using System;
 using JetBrains.Annotations;
 using Microsoft.FSharp.Math;
 
 namespace Generator.Core
 {
-	public sealed class AdditionGenerator : OperationGeneratorBase<int>
+	public sealed class IntergralAdditionGenerator : OperationGeneratorBase<int>
 	{
 		public override Operation<int> Generate( GenerationContext<int> context )
 		{
@@ -30,16 +29,11 @@ namespace Generator.Core
 
 		public override double Complexity
 		{
-			get { return Complexities.AdditionSubtractionComplexity; }
+			get { return Complexities.AdditionComplexity; }
 		}
 
 		public override bool CanGenerate( GenerationContext<int> context )
 		{
-			if ( context.ExpressionRange.MaxValue <= context.TermRange.MinValue )
-			{
-				return false;
-			}
-
 			bool twoTermsIntersectsWithExpressionRange =
 				( context.TermRange + context.TermRange ).IntersectsWith( context.ExpressionRange );
 
