@@ -16,8 +16,8 @@ namespace MathExercisesGenerator
 			IntExerciseGenerator gen = new IntExerciseGenerator( new ProbabilityGenerator(), new IntRandomNumberGenerator(),
 																maxComplexity,
 																new NumberGenerator(),
-																new AdditionGenerator(),
-																new SubtractionGenerator()
+																new IntergralAdditionGenerator(),
+																new IntegralSubtractionGenerator()
 																);
 
 			ConvertToLineVisitor<int> visitor = new ConvertToLineVisitor<int>();

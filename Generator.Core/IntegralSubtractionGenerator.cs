@@ -1,6 +1,6 @@
 namespace Generator.Core
 {
-	public sealed class SubtractionGenerator : OperationGeneratorBase<int>
+	public sealed class IntegralSubtractionGenerator : OperationGeneratorBase<int>
 	{
 		public override Operation<int> Generate( GenerationContext<int> context )
 		{
@@ -16,7 +16,8 @@ namespace Generator.Core
 			var leftValue = left.Evaluate();
 			Range<int> rightRange = context.TermRange.Intersect( Range.From( leftValue ) - context.ExpressionRange );
 			var right = context.ParentGenerator.Generate(
-				context.CloneWithMaxComplexity( rightComplexity )
+				context
+					.CloneWithMaxComplexity( rightComplexity )
 					.CloneWithRange( rightRange ) );
 
 			var result = new SubtractOperation<int>( left, right );
@@ -25,11 +26,6 @@ namespace Generator.Core
 
 		public override bool CanGenerate( GenerationContext<int> context )
 		{
-			if ( context.ExpressionRange.MinValue >= context.TermRange.MaxValue )
-			{
-				return false;
-			}
-
 			bool differenceOfTwoTermsIntersectsWithExpressionRange =
 				(context.TermRange - context.TermRange).IntersectsWith(context.ExpressionRange);
 
@@ -43,7 +39,7 @@ namespace Generator.Core
 
 		public override double Complexity
 		{
-			get { return Complexities.AdditionSubtractionComplexity; }
+			get { return Complexities.SubtractionComplexity; }
 		}
 	}
 }

@@ -23,7 +23,7 @@ namespace MathExercisesGenerator.Tests
 		private static IntExerciseGenerator CreateExerciseGenerator( double maxComplexity )
 		{
 			NumberGenerator numberGenerator = new NumberGenerator();
-			AdditionGenerator addSubGenerator = new AdditionGenerator();
+			IntergralAdditionGenerator addSubGenerator = new IntergralAdditionGenerator();
 
 			IntExerciseGenerator gen = new IntExerciseGenerator( new ProbabilityGenerator(), new IntRandomNumberGenerator(), maxComplexity,
 																numberGenerator, addSubGenerator );
@@ -33,7 +33,7 @@ namespace MathExercisesGenerator.Tests
 		[Test]
 		public void ShouldCreateOneAddition()
 		{
-			var gen = CreateExerciseGenerator( Complexities.AdditionSubtractionComplexity );
+			var gen = CreateExerciseGenerator( Complexities.AdditionComplexity );
 
 			var op = gen.Generate( new Range<int>( 0, 10 ) );
 
