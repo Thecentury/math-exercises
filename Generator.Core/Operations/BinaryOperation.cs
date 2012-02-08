@@ -1,7 +1,7 @@
 using System;
 using JetBrains.Annotations;
 
-namespace Generator.Core
+namespace Generator.Core.Operations
 {
 	public abstract class BinaryOperation<T> : Operation<T>
 	{

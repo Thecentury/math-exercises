@@ -1,3 +1,5 @@
+using Generator.Core.Operations;
+
 namespace Generator.Core
 {
 	public sealed class ConvertToOperationViewModelVisitor : IVisitor<OperationViewModel>

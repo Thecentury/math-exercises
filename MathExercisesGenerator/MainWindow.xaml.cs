@@ -51,12 +51,13 @@ namespace MathExercisesGenerator
 
 		private void WindowKeyDown( object sender, KeyEventArgs e )
 		{
-			if ( e.Key == Key.F1 )
+			if ( e.Key == Key.F2 )
 			{
 				SettingsEditor editor = new SettingsEditor { DataContext = Settings.Default };
-				editor.ShowDialog();
-
-				CreateExamples();
+				if ( editor.ShowDialog() == true )
+				{
+					CreateExamples();
+				}
 			}
 			else if ( e.Key == Key.F5 )
 			{

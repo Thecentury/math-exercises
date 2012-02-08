@@ -27,12 +27,14 @@ namespace MathExercisesGenerator
 		private void SaveButtonClick( object sender, RoutedEventArgs e )
 		{
 			Settings.Default.Save();
+			DialogResult = true;
 			Close();
 		}
 
 		private void CancelButtonClick( object sender, RoutedEventArgs e )
 		{
 			Settings.Default.Reset();
+			DialogResult = false;
 			Close();
 		}
 	}

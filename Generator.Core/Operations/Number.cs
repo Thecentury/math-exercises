@@ -1,6 +1,4 @@
-using System.Globalization;
-
-namespace Generator.Core
+namespace Generator.Core.Operations
 {
 	public class Number<T> : Operation<T>
 	{

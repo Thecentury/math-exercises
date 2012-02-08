@@ -1,4 +1,4 @@
-namespace Generator.Core
+namespace Generator.Core.Operations
 {
 	public sealed class Brackets : Operation<int>
 	{

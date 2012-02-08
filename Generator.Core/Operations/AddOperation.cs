@@ -1,6 +1,6 @@
 using Microsoft.FSharp.Math;
 
-namespace Generator.Core
+namespace Generator.Core.Operations
 {
 	public class AddOperation<T> : BinaryOperation<T>
 	{

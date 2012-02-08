@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Generator.Core;
+using Generator.Core.Constraints;
+using Generator.Core.Generators;
 
 namespace MathExercisesGenerator
 {
@@ -16,10 +19,12 @@ namespace MathExercisesGenerator
 			IntExerciseGenerator gen = new IntExerciseGenerator( new ProbabilityGenerator(), new IntRandomNumberGenerator(),
 																maxComplexity,
 																new NumberGenerator(),
-																new IntergralAdditionGenerator(),
+																new IntegralAdditionGenerator(),
 																new IntegralSubtractionGenerator(),
 																new IntegralPositiveMultiplicationGenerator()
 																);
+
+			gen.CustomConstraints.Add( new MaxDepthConstraint<int>( 3 ) );
 
 			ConvertToLineVisitor<int> visitor = new ConvertToLineVisitor<int>();
 			BracketsVisitor bracketsVisitor = new BracketsVisitor();
@@ -27,6 +32,7 @@ namespace MathExercisesGenerator
 			for ( int i = 0; i < exercisesCount; i++ )
 			{
 				var op = gen.Generate( range );
+
 				var opWithBrackets = bracketsVisitor.VisitCore( op );
 				var terms = visitor.VisitCore( opWithBrackets );
 				var exercise = new ExerciseViewModel( op, terms );

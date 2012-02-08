@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Generator.Core;
+using Generator.Core.Generators;
+using Generator.Core.Operations;
 using Moq;
 using NUnit.Framework;
 using Range = Generator.Core.Range;
@@ -35,7 +37,7 @@ namespace MathExercisesGenerator.Tests
 
 			IOperationGenerator<int> generator =
 				( typeof( T ) == typeof( AddOperation<int> ) )
-					? (IOperationGenerator<int>)new IntergralAdditionGenerator()
+					? (IOperationGenerator<int>)new IntegralAdditionGenerator()
 					: new IntegralSubtractionGenerator();
 
 			var range = Range.Create( 0, 2 );
@@ -87,7 +89,7 @@ namespace MathExercisesGenerator.Tests
 		{
 			var context = CreateMockContext( 2.0, expressionRange: Range.Create( 1, 1 ), termRange: Range.Create( 1, 100 ) );
 
-			var generator = new IntergralAdditionGenerator();
+			var generator = new IntegralAdditionGenerator();
 
 			Assert.That( generator.CanGenerate( context ), Is.False );
 		}
@@ -98,7 +100,7 @@ namespace MathExercisesGenerator.Tests
 		{
 			var context = CreateMockContext( 2.0, expressionRange: Range.Create( 3, 10 ), termRange: Range.Create( termMin, termMax ) );
 
-			var generator = new IntergralAdditionGenerator();
+			var generator = new IntegralAdditionGenerator();
 
 			Assert.That( generator.CanGenerate( context ), Is.False );
 		}
@@ -124,7 +126,7 @@ namespace MathExercisesGenerator.Tests
 			Mock<IRandomNumberGenerator<double>> rndMock = new Mock<IRandomNumberGenerator<double>>();
 			rndMock.Setup( r => r.Generate( It.IsAny<Range<double>>() ) ).Returns( 0.5 );
 
-			var generator = new IntergralAdditionGenerator();
+			var generator = new IntegralAdditionGenerator();
 
 			const double complexity = 2;
 			var range = new Range<int>( 2, 2 );

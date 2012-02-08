@@ -1,6 +1,7 @@
-using System;
+using Generator.Core.Constraints;
+using Generator.Core.Operations;
 
-namespace Generator.Core
+namespace Generator.Core.Generators
 {
 	public sealed class IntegralPositiveMultiplicationGenerator : OperationGeneratorBase<int>
 	{

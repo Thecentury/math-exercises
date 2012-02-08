@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Generator.Core.Operations;
 
 namespace Generator.Core
 {
