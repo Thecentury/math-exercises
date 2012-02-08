@@ -13,7 +13,7 @@ namespace MathExercisesGenerator.Tests
 		[Test]
 		public void ShouldEncloseInBrackets()
 		{
-			var op = new Number( 1 ) + ( new Number( 2 ) + new Number( 3 ) );
+			var op = Operation.From( 1 ) + ( Operation.From( 2 ) + Operation.From( 3 ) );
 			string text = GetOperationTextWithBrackets( op );
 
 			Assert.That( text, Is.EqualTo( "1 + (2 + 3)" ) );
@@ -22,7 +22,7 @@ namespace MathExercisesGenerator.Tests
 		[Test]
 		public void ShouldNotEncloseInBrackets()
 		{
-			var op = ( new Number( 1 ) + new Number( 2 ) ) + new Number( 3 );
+			var op = ( Operation.From( 1 ) + Operation.From( 2 ) ) + Operation.From( 3 );
 			string text = GetOperationTextWithBrackets( op );
 
 			Assert.That( text, Is.EqualTo( "1 + 2 + 3" ) );

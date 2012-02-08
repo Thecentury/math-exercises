@@ -53,9 +53,14 @@ namespace MathExercisesGenerator
 		{
 			if ( e.Key == Key.F1 )
 			{
-				SettingsEditor editor = new SettingsEditor {DataContext = Settings.Default};
+				SettingsEditor editor = new SettingsEditor { DataContext = Settings.Default };
 				editor.ShowDialog();
 
+				CreateExamples();
+			}
+			else if ( e.Key == Key.F5 )
+			{
+				// refresh
 				CreateExamples();
 			}
 		}

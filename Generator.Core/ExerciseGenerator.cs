@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using JetBrains.Annotations;
 
@@ -29,17 +30,31 @@ namespace Generator.Core
 
 		public override Operation<T> Generate( GenerationContext<T> context )
 		{
-			var generator = GetSuitableGenerator( context );
+			int attemptCounter = 0;
+			do
+			{
+				var generator = GetSuitableGenerator( context );
 
-			var op = generator.Generate( context );
-			return op;
+				var op = generator.Generate( context );
+
+				bool passesConstraints = context.PassesConstraints( op );
+				if ( passesConstraints )
+				{
+					return op;
+				}
+				else
+				{
+					attemptCounter++;
+					Debug.WriteLine( "Attempt #{0}", attemptCounter );
+				}
+			} while ( true );
 		}
 
 		private IOperationGenerator<T> GetSuitableGenerator( GenerationContext<T> context )
 		{
 			var acceptedGenerators = _generators.Where( g =>
 					g.Complexity <= context.MaxComplexity &&
-					g.CanGenerate( context ))
+					g.CanGenerate( context ) )
 				.ToList();
 
 			double weightsSum = acceptedGenerators.Sum( g => g.GetWeight() );
@@ -63,7 +78,11 @@ namespace Generator.Core
 		{
 			var context = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, this, _maxComplexity,
 												   range, range );
+
+			context.PushConstraint(new InExpressionRangeConstraint<T>());
 			var operation = Generate( context );
+			context.PopConstraint();
+
 			return operation;
 		}
 

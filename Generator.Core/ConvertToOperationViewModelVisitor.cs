@@ -2,7 +2,7 @@ namespace Generator.Core
 {
 	public sealed class ConvertToOperationViewModelVisitor : IVisitor<OperationViewModel>
 	{
-		private OperationViewModel Visit( Number number )
+		private OperationViewModel Visit( Number<int> number )
 		{
 			return new NumberOperationViewModel( number );
 		}

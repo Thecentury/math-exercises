@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 using JetBrains.Annotations;
@@ -14,13 +15,13 @@ namespace Generator.Core
 		private readonly IRandomNumberGenerator<T> _numberGenerator;
 		private readonly IOperationGenerator<T> _parentGenerator;
 		private readonly Range<T> _expressionRange;
+		private readonly Range<T> _termRange;
+		private readonly Stack<IConstraint<T>> _constraints = new Stack<IConstraint<T>>();
 
 		public Range<T> ExpressionRange
 		{
 			get { return _expressionRange; }
 		}
-
-		private readonly Range<T> _termRange;
 
 		public Range<T> TermRange
 		{
@@ -47,6 +48,27 @@ namespace Generator.Core
 			get { return _parentGenerator; }
 		}
 
+		public bool PassesConstraints( Operation<T> operation )
+		{
+			bool passes = _constraints.All( c => c.Passes( this, operation ) );
+			return passes;
+		}
+
+		public void PushConstraint( [NotNull] IConstraint<T> constraint )
+		{
+			if ( constraint == null )
+			{
+				throw new ArgumentNullException( "constraint" );
+			}
+
+			_constraints.Push( constraint );
+		}
+
+		public void PopConstraint()
+		{
+			_constraints.Pop();
+		}
+
 		public GenerationContext( IRandomNumberGenerator<double> probabilityGenerator, IRandomNumberGenerator<T> numberGenerator,
 								  IOperationGenerator<T> parentGenerator,
 								  double maxComplexity,
@@ -70,14 +92,32 @@ namespace Generator.Core
 		{
 			GenerationContext<T> clone = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, _parentGenerator,
 																  maxComplexity, _expressionRange, _termRange );
+
+			CopyConstraints( clone );
+
 			return clone;
 		}
 
+		[Pure]
 		public GenerationContext<T> CloneWithRange( Range<T> range )
 		{
 			GenerationContext<T> clone = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, _parentGenerator, _maxComplexity, range, _termRange );
 
+			CopyConstraints( clone );
+
 			return clone;
+		}
+
+		private void CopyConstraints( GenerationContext<T> clone )
+		{
+			IConstraint<T>[] array = new IConstraint<T>[_constraints.Count];
+			_constraints.CopyTo( array, 0 );
+			Array.Reverse( array );
+
+			foreach ( var constraint in array )
+			{
+				clone._constraints.Push( constraint );
+			}
 		}
 	}
 }

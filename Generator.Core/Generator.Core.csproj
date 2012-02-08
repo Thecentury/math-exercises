@@ -46,6 +46,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IConstraint.cs" />
     <Compile Include="IntegralPositiveMultiplicationGenerator.cs" />
     <Compile Include="IntergralAdditionGenerator.cs" />
     <Compile Include="AddOperation.cs" />

@@ -32,14 +32,14 @@ namespace Generator.Core
 
 	public sealed class NumberOperationViewModel : OperationViewModel
 	{
-		private readonly Number _number;
+		private readonly Number<int> _number;
 
-		public NumberOperationViewModel( Number number )
+		public NumberOperationViewModel( Number<int> number )
 		{
 			_number = number;
 		}
 
-		public Number Number
+		public Number<int> Number
 		{
 			get { return _number; }
 		}

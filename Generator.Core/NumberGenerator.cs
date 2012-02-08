@@ -5,7 +5,7 @@ namespace Generator.Core
 		public override Operation<int> Generate( GenerationContext<int> context )
 		{
 			int value = context.NextValue();
-			return new Number( value );
+			return new Number<int>( value );
 		}
 
 		public override double Complexity

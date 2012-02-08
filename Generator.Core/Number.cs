@@ -2,23 +2,28 @@ using System.Globalization;
 
 namespace Generator.Core
 {
-	public sealed class Number : Operation<int>
+	public class Number<T> : Operation<T>
 	{
-		private readonly int _value;
+		private readonly T _value;
 
-		public Number( int value )
+		public Number( T value )
 		{
 			_value = value;
 		}
 
-		public override int Evaluate()
+		public T Value
+		{
+			get { return _value; }
+		}
+
+		public override T Evaluate()
 		{
 			return _value;
 		}
 
 		public override string Text
 		{
-			get { return _value.ToString( CultureInfo.InvariantCulture ); }
+			get { return _value.ToString(); }
 		}
 
 		public override double Priority
