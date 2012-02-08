@@ -49,6 +49,17 @@ namespace Generator.Core
 			}
 		}
 
+		public sealed override int Depth
+		{
+			get
+			{
+				int leftDepth = Left.Depth;
+				int rightDepth = Right.Depth;
+				int depth = Math.Max( leftDepth, rightDepth ) + 1;
+				return depth;
+			}
+		}
+
 		public abstract BinaryOperation<T> CloneCore();
 	}
 }

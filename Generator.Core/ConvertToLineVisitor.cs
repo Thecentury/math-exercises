@@ -4,7 +4,7 @@ namespace Generator.Core
 {
 	public sealed class ConvertToLineVisitor<T> : IVisitor<List<TermViewModel>>
 	{
-		private List<TermViewModel> Visit( Number number )
+		private List<TermViewModel> Visit( Number<T> number )
 		{
 			return Single( new NumberViewModel( number.Text ) );
 		}

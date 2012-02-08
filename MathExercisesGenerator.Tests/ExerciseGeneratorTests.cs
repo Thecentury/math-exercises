@@ -17,7 +17,7 @@ namespace MathExercisesGenerator.Tests
 
 			var op = gen.Generate( new Range<int>( 0, 10 ) );
 
-			Assert.That( op, Is.InstanceOf<Number>() );
+			Assert.That( op, Is.InstanceOf<Number<int>>() );
 		}
 
 		private static IntExerciseGenerator CreateExerciseGenerator( double maxComplexity )
