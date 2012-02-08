@@ -1,3 +1,5 @@
+using Generator.Core.Operations;
+
 namespace Generator.Core
 {
 	public interface IOperationGenerator<T>

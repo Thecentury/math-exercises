@@ -1,6 +1,7 @@
 using System.Windows.Markup;
+using Generator.Core.Operations;
 
-namespace Generator.Core
+namespace Generator.Core.Generators
 {
 	[ContentProperty( "Inner" )]
 	public class ComplexityGeneratorWrapper<T> : OperationGeneratorBase<T>

@@ -1,4 +1,4 @@
-namespace Generator.Core
+namespace Generator.Core.Operations
 {
 	public static class Operation
 	{
@@ -44,13 +44,5 @@ namespace Generator.Core
 		}
 
 		#endregion
-	}
-
-	public enum OperationPriority
-	{
-		AdditionSubtraction,
-		MultiplicationDivision,
-		Number,
-		Brackets
 	}
 }

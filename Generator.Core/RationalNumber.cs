@@ -32,6 +32,7 @@ namespace Generator.Core
 			}
 		}
 
+
 		public int Nominator
 		{
 			get { return _nominator; }

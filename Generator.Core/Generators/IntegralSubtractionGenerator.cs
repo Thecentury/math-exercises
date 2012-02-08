@@ -1,4 +1,6 @@
-namespace Generator.Core
+using Generator.Core.Operations;
+
+namespace Generator.Core.Generators
 {
 	public sealed class IntegralSubtractionGenerator : OperationGeneratorBase<int>
 	{

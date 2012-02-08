@@ -1,26 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Generator.Core.Operations;
 using Microsoft.FSharp.Math;
 
-namespace Generator.Core
+namespace Generator.Core.Constraints
 {
-	public interface IConstraint<T>
-	{
-		bool Passes( GenerationContext<T> ctx, Operation<T> op );
-	}
-
-	public sealed class InExpressionRangeConstraint<T> : IConstraint<T>
-	{
-		public bool Passes( GenerationContext<T> ctx, Operation<T> op )
-		{
-			T value = op.Evaluate();
-			bool passes = ctx.ExpressionRange.Includes( value );
-			return passes;
-		}
-	}
-
 	public sealed class NotVerbatimConstantConstraint<T> : IConstraint<T>
 	{
 		private static readonly INumeric<T> math = GlobalAssociations.GetNumericAssociation<T>();

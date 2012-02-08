@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace Generator.Core
+namespace Generator.Core.Generators
 {
 	public sealed class IntExerciseGenerator : ExerciseGenerator<int>
 	{

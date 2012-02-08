@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Generator.Core.Constraints;
+using Generator.Core.Operations;
 using JetBrains.Annotations;
 
-namespace Generator.Core
+namespace Generator.Core.Generators
 {
 	public class ExerciseGenerator<T> : OperationGeneratorBase<T>
 	{
@@ -13,6 +15,8 @@ namespace Generator.Core
 		private readonly double _maxComplexity;
 
 		private readonly List<IOperationGenerator<T>> _generators = new List<IOperationGenerator<T>>();
+
+		private readonly List<IConstraint<T>> _customConstraints = new List<IConstraint<T>>();
 
 		public ExerciseGenerator( IRandomNumberGenerator<double> probabilityGenerator, IRandomNumberGenerator<T> numberGenerator, double maxComplexity,
 								  [NotNull] params IOperationGenerator<T>[] generators )
@@ -71,6 +75,7 @@ namespace Generator.Core
 					break;
 				}
 			}
+
 			return generator;
 		}
 
@@ -80,6 +85,7 @@ namespace Generator.Core
 												   range, range );
 
 			using ( context.PushConstraints( new InExpressionRangeConstraint<T>() ) )
+			using ( context.PushConstraints( _customConstraints ) )
 			{
 				var operation = Generate( context );
 				return operation;
@@ -89,6 +95,11 @@ namespace Generator.Core
 		public override double Complexity
 		{
 			get { return Double.NaN; }
+		}
+
+		public List<IConstraint<T>> CustomConstraints
+		{
+			get { return _customConstraints; }
 		}
 	}
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Generator.Core;
+using Generator.Core.Generators;
+using Generator.Core.Operations;
 using NUnit.Framework;
 
 namespace MathExercisesGenerator.Tests
@@ -23,7 +25,7 @@ namespace MathExercisesGenerator.Tests
 		private static IntExerciseGenerator CreateExerciseGenerator( double maxComplexity )
 		{
 			NumberGenerator numberGenerator = new NumberGenerator();
-			IntergralAdditionGenerator addSubGenerator = new IntergralAdditionGenerator();
+			IntegralAdditionGenerator addSubGenerator = new IntegralAdditionGenerator();
 
 			IntExerciseGenerator gen = new IntExerciseGenerator( new ProbabilityGenerator(), new IntRandomNumberGenerator(), maxComplexity,
 																numberGenerator, addSubGenerator );
@@ -33,7 +35,7 @@ namespace MathExercisesGenerator.Tests
 		[Test]
 		public void ShouldCreateOneAddition()
 		{
-			var gen = CreateExerciseGenerator( Complexities.AdditionComplexity );
+			var gen = CreateExerciseGenerator( Complexities.AdditionComplexity + 0.1 );
 
 			var op = gen.Generate( new Range<int>( 0, 10 ) );
 

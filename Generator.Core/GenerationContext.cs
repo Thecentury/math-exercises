@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
+using Generator.Core.Constraints;
+using Generator.Core.Operations;
 using JetBrains.Annotations;
 using Microsoft.FSharp.Math;
 
@@ -54,7 +56,12 @@ namespace Generator.Core
 			return passes;
 		}
 
-		public IDisposable PushConstraints( params  IConstraint<T>[] constraints )
+		public IDisposable PushConstraints( params IConstraint<T>[] constraints )
+		{
+			return new ConstraintsSession( this, constraints );
+		}
+
+		public IDisposable PushConstraints( ICollection<IConstraint<T>> constraints )
 		{
 			return new ConstraintsSession( this, constraints );
 		}
@@ -130,10 +137,10 @@ namespace Generator.Core
 			private readonly int _constraintsCount;
 			private readonly GenerationContext<T> _context;
 
-			public ConstraintsSession( GenerationContext<T> context, params IConstraint<T>[] constraints )
+			public ConstraintsSession( GenerationContext<T> context, ICollection<IConstraint<T>> constraints )
 			{
 				_context = context;
-				_constraintsCount = constraints.Length;
+				_constraintsCount = constraints.Count;
 
 				foreach ( var constraint in constraints )
 				{

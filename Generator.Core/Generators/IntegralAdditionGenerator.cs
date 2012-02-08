@@ -1,9 +1,9 @@
-using JetBrains.Annotations;
-using Microsoft.FSharp.Math;
+using System.Diagnostics;
+using Generator.Core.Operations;
 
-namespace Generator.Core
+namespace Generator.Core.Generators
 {
-	public sealed class IntergralAdditionGenerator : OperationGeneratorBase<int>
+	public sealed class IntegralAdditionGenerator : OperationGeneratorBase<int>
 	{
 		public override Operation<int> Generate( GenerationContext<int> context )
 		{
@@ -24,6 +24,9 @@ namespace Generator.Core
 					.CloneWithRange( rightRange ) );
 
 			var result = new AddOperation<int>( left, right );
+
+			Debug.WriteLine( "{0}, Complexity {1} & {2}", result, leftComplexity, rightComplexity );
+
 			return result;
 		}
 

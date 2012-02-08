@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Generator.Core;
+using Generator.Core.Operations;
 
 namespace MathExercisesGenerator
 {
