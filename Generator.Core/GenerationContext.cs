@@ -54,7 +54,12 @@ namespace Generator.Core
 			return passes;
 		}
 
-		public void PushConstraint( [NotNull] IConstraint<T> constraint )
+		public IDisposable PushConstraints( params  IConstraint<T>[] constraints )
+		{
+			return new ConstraintsSession( this, constraints );
+		}
+
+		private void PushConstraint( [NotNull] IConstraint<T> constraint )
 		{
 			if ( constraint == null )
 			{
@@ -64,7 +69,7 @@ namespace Generator.Core
 			_constraints.Push( constraint );
 		}
 
-		public void PopConstraint()
+		private void PopConstraint()
 		{
 			_constraints.Pop();
 		}
@@ -118,6 +123,35 @@ namespace Generator.Core
 			{
 				clone._constraints.Push( constraint );
 			}
+		}
+
+		private class ConstraintsSession : IDisposable
+		{
+			private readonly int _constraintsCount;
+			private readonly GenerationContext<T> _context;
+
+			public ConstraintsSession( GenerationContext<T> context, params IConstraint<T>[] constraints )
+			{
+				_context = context;
+				_constraintsCount = constraints.Length;
+
+				foreach ( var constraint in constraints )
+				{
+					context.PushConstraint( constraint );
+				}
+			}
+
+			#region Implementation of IDisposable
+
+			public void Dispose()
+			{
+				for ( int i = 0; i < _constraintsCount; i++ )
+				{
+					_context.PopConstraint();
+				}
+			}
+
+			#endregion
 		}
 	}
 }

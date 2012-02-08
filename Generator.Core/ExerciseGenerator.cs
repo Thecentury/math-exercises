@@ -79,11 +79,11 @@ namespace Generator.Core
 			var context = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, this, _maxComplexity,
 												   range, range );
 
-			context.PushConstraint(new InExpressionRangeConstraint<T>());
-			var operation = Generate( context );
-			context.PopConstraint();
-
-			return operation;
+			using ( context.PushConstraints( new InExpressionRangeConstraint<T>() ) )
+			{
+				var operation = Generate( context );
+				return operation;
+			}
 		}
 
 		public override double Complexity
