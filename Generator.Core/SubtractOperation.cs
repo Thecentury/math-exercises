@@ -1,14 +1,18 @@
+using Microsoft.FSharp.Math;
+
 namespace Generator.Core
 {
-	public sealed class SubtractOperation : BinaryOperation<int>
+	public sealed class SubtractOperation<T> : BinaryOperation<T>
 	{
+		private static readonly INumeric<T> math = GlobalAssociations.GetNumericAssociation<T>();
+
 		public SubtractOperation() { }
 
-		public SubtractOperation( Operation<int> operand1, Operation<int> operand2 ) : base( operand1, operand2 ) { }
+		public SubtractOperation( Operation<T> operand1, Operation<T> operand2 ) : base( operand1, operand2 ) { }
 
-		protected override int EvaluateCore( int value1, int value2 )
+		protected override T EvaluateCore( T value1, T value2 )
 		{
-			return value1 - value2;
+			return math.Subtract( value1, value2 );
 		}
 
 		public override string OperationText
@@ -16,9 +20,14 @@ namespace Generator.Core
 			get { return "-"; }
 		}
 
-		public override BinaryOperation<int> CloneCore()
+		public override BinaryOperation<T> CloneCore()
 		{
-			return new SubtractOperation();
+			return new SubtractOperation<T>();
+		}
+
+		public override double Priority
+		{
+			get { return (int)OperationPriority.AdditionSubtraction; }
 		}
 	}
 }

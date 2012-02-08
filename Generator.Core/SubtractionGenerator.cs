@@ -19,7 +19,7 @@ namespace Generator.Core
 				context.CloneWithMaxComplexity( rightComplexity )
 					.CloneWithRange( rightRange ) );
 
-			var result = new SubtractOperation( left, right );
+			var result = new SubtractOperation<int>( left, right );
 			return result;
 		}
 

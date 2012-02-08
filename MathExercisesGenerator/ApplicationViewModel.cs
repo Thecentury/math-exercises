@@ -20,7 +20,7 @@ namespace MathExercisesGenerator
 																new SubtractionGenerator()
 																);
 
-			ConvertToLineVisitor visitor = new ConvertToLineVisitor();
+			ConvertToLineVisitor<int> visitor = new ConvertToLineVisitor<int>();
 			BracketsVisitor bracketsVisitor = new BracketsVisitor();
 
 			for ( int i = 0; i < exercisesCount; i++ )

@@ -24,7 +24,7 @@ namespace Generator.Core
 				context.CloneWithMaxComplexity( rightComplexity )
 					.CloneWithRange( rightRange ) );
 
-			var result = new AddOperation( left, right );
+			var result = new AddOperation<int>( left, right );
 			return result;
 		}
 

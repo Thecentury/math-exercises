@@ -16,13 +16,13 @@ namespace MathExercisesGenerator.Tests
 		[Test]
 		public void ShouldGenerateAddition()
 		{
-			CreateAndAssertBinaryOp<AddOperation>( 1 );
+			CreateAndAssertBinaryOp<AddOperation<int>>( 1 );
 		}
 
 		[Test]
 		public void ShouldGenerateSubtraction()
 		{
-			CreateAndAssertBinaryOp<SubtractOperation>( 0 );
+			CreateAndAssertBinaryOp<SubtractOperation<int>>( 0 );
 		}
 
 		private static void CreateAndAssertBinaryOp<T>( double rndMockValue )
@@ -34,7 +34,7 @@ namespace MathExercisesGenerator.Tests
 			rndMock.Setup( r => r.Generate( It.IsAny<Range<double>>() ) ).Returns( rndMockValue );
 
 			IOperationGenerator<int> generator =
-				( typeof( T ) == typeof( AddOperation ) )
+				( typeof( T ) == typeof( AddOperation<int> ) )
 					? (IOperationGenerator<int>)new AdditionGenerator()
 					: new SubtractionGenerator();
 
