@@ -23,6 +23,7 @@ namespace Generator.Core
 
 	public sealed class AdditionViewModel : TermViewModel { }
 	public sealed class SubtractionViewModel : TermViewModel { }
+	public sealed class MultiplicationViewModel : TermViewModel { }
 	public sealed class OpeningBracketViewModel : TermViewModel { }
 	public sealed class ClosingBracketViewModel : TermViewModel { }
 }
