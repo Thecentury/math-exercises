@@ -88,7 +88,7 @@ namespace Generator.Core
 
 		public override double Complexity
 		{
-			get { throw new NotSupportedException(); }
+			get { return Double.NaN; }
 		}
 	}
 }
