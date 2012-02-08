@@ -15,6 +15,12 @@ namespace Generator.Core
 		{
 			_nominator = nominator;
 			_denominator = denominator;
+
+			if ( _denominator < 0 )
+			{
+				_denominator = -_denominator;
+				_nominator = -_nominator;
+			}
 		}
 
 		public int Nominator
@@ -60,11 +66,16 @@ namespace Generator.Core
 
 		public static int GreatestCommonDivisor( int i1, int i2 )
 		{
-			if ( i1 < 1 )
+			if ( i1 == 0 || i2 == 0 )
+			{
+				return Math.Max( i1, i2 );
+			}
+
+			if ( i1 < 0 )
 			{
 				throw new ArgumentOutOfRangeException( "i1" );
 			}
-			if ( i2 < 1 )
+			if ( i2 < 0 )
 			{
 				throw new ArgumentOutOfRangeException( "i2" );
 			}
@@ -110,9 +121,44 @@ namespace Generator.Core
 			return (double)this;
 		}
 
-		public static explicit operator double( RationalNumber number )
+		public static explicit operator double( RationalNumber r )
 		{
-			return ( (double)number.Nominator ) / number.Denominator;
+			return ( (double)r.Nominator ) / r.Denominator;
+		}
+
+		public static RationalNumber operator -( RationalNumber r )
+		{
+			return new RationalNumber( -r._nominator, r._denominator );
+		}
+
+		public static RationalNumber operator +( RationalNumber r1, RationalNumber r2 )
+		{
+			RationalNumber result = new RationalNumber( r1.Nominator * r2.Denominator + r2.Nominator * r1.Denominator, r1.Denominator * r2.Denominator );
+			result = result.Cancel();
+
+			return result;
+		}
+
+		public static RationalNumber operator -( RationalNumber r1, RationalNumber r2 )
+		{
+			RationalNumber result = new RationalNumber( r1.Nominator * r2.Denominator - r2.Nominator * r1.Denominator, r1.Denominator * r2.Denominator );
+			result = result.Cancel();
+
+			return result;
+		}
+
+		public static RationalNumber operator *( RationalNumber r1, RationalNumber r2 )
+		{
+			RationalNumber result = new RationalNumber( r1._nominator * r2._nominator, r1._denominator * r2._denominator );
+			result = result.Cancel();
+			return result;
+		}
+
+		public static RationalNumber operator /( RationalNumber r1, RationalNumber r2 )
+		{
+			RationalNumber result = new RationalNumber( r1._nominator * r2._denominator, r1._denominator * r2._nominator );
+			result = result.Cancel();
+			return result;
 		}
 
 		#endregion
