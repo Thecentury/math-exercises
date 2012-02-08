@@ -39,7 +39,8 @@ namespace Generator.Core.Generators
 			{
 				var generator = GetSuitableGenerator( context );
 
-				var op = generator.Generate( context );
+				var clonedContext = context.CloneWithMaxComplexity( context.MaxComplexity - generator.Complexity );
+				var op = generator.Generate( clonedContext );
 
 				bool passesConstraints = context.PassesConstraints( op );
 				if ( passesConstraints )
