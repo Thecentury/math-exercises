@@ -24,7 +24,8 @@ namespace MathExercisesGenerator
 																new IntegralPositiveMultiplicationGenerator()
 																);
 
-			ConvertToLineVisitor<int> visitor = new ConvertToLineVisitor<int>();
+			ConvertToLineVisitor<int> convertToLineVisitorvisitor = new ConvertToLineVisitor<int>();
+			ConvertToOperationViewModelVisitor convertToOperationViewModelVisitor = new ConvertToOperationViewModelVisitor();
 			BracketsVisitor bracketsVisitor = new BracketsVisitor();
 
 			for ( int i = 0; i < exercisesCount; i++ )
@@ -32,8 +33,10 @@ namespace MathExercisesGenerator
 				var op = gen.Generate( range );
 
 				var opWithBrackets = bracketsVisitor.VisitCore( op );
-				var terms = visitor.VisitCore( opWithBrackets );
-				var exercise = new ExerciseViewModel( op, terms );
+				var terms = convertToLineVisitorvisitor.VisitCore( opWithBrackets );
+				var operationViewModel = convertToOperationViewModelVisitor.VisitCore( opWithBrackets );
+
+				var exercise = new ExerciseViewModel( op, terms, operationViewModel );
 				exercise.PropertyChanged += OnExercisePropertyChanged;
 				_exercises.Add( exercise );
 			}
