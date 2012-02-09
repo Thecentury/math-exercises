@@ -10,17 +10,21 @@ namespace Generator.Core.Generators
 			double leftComplexity = context.ProbabilityGenerator.GetProbability() * context.MaxComplexity;
 			double rightComplexity = context.MaxComplexity - leftComplexity;
 
-			using ( context.PushConstraints( new NotVerbatimConstantConstraint<int>( 0 ), new NotVerbatimConstantConstraint<int>( 1 ) ) )
+			using ( context.PushConstraints(
+				new NotVerbatimConstantConstraint<int>( 0 ),
+				new NotVerbatimConstantConstraint<int>( 1 ),
+				new ContextDepthConstraint<int>( 1, 
+					new ValueInRangeConstraint<int>( 2, 9 ) ) ) )
 			{
 				var left = context.ParentGenerator.Generate(
 					context
-						.CloneWithMaxComplexity(leftComplexity)
-						.CloneWithRange(Range.Create(1, 9)));
+						.CloneWithMaxComplexity( leftComplexity )
+						.CloneWithRange( Range.Create( 1, 9 ) ) );
 
 				var right = context.ParentGenerator.Generate(
 					context
-						.CloneWithMaxComplexity(rightComplexity)
-						.CloneWithRange(Range.Create(1, 9)));
+						.CloneWithMaxComplexity( rightComplexity )
+						.CloneWithRange( Range.Create( 1, 9 ) ) );
 
 				var result = new MultiplyOperation<int>( left, right );
 				return result;

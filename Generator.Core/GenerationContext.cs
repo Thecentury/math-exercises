@@ -20,6 +20,8 @@ namespace Generator.Core
 		private readonly Range<T> _termRange;
 		private readonly Stack<IConstraint<T>> _constraints = new Stack<IConstraint<T>>();
 
+		private int _currentDepth;
+
 		public Range<T> ExpressionRange
 		{
 			get { return _expressionRange; }
@@ -48,6 +50,21 @@ namespace Generator.Core
 		public IOperationGenerator<T> ParentGenerator
 		{
 			get { return _parentGenerator; }
+		}
+
+		public int CurrentDepth
+		{
+			get { return _currentDepth; }
+		}
+
+		public void IncreaseDepth()
+		{
+			_currentDepth++;
+		}
+
+		public void DecreaseDepth()
+		{
+			_currentDepth--;
 		}
 
 		public bool PassesConstraints( Operation<T> operation )
@@ -104,6 +121,7 @@ namespace Generator.Core
 		{
 			GenerationContext<T> clone = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, _parentGenerator,
 																  maxComplexity, _expressionRange, _termRange );
+			clone._currentDepth = this._currentDepth;
 
 			CopyConstraints( clone );
 
@@ -114,6 +132,8 @@ namespace Generator.Core
 		public GenerationContext<T> CloneWithRange( Range<T> range )
 		{
 			GenerationContext<T> clone = new GenerationContext<T>( _probabilityGenerator, _numberGenerator, _parentGenerator, _maxComplexity, range, _termRange );
+
+			clone._currentDepth = this._currentDepth;
 
 			CopyConstraints( clone );
 
