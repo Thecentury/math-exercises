@@ -9,7 +9,7 @@ namespace MathExercisesGenerator
 		private readonly Operation<int> _operation;
 		private readonly List<TermViewModel> _terms;
 
-		public ExerciseViewModel( Operation<int> operation, List<TermViewModel> terms)
+		public ExerciseViewModel( Operation<int> operation, List<TermViewModel> terms )
 		{
 			_operation = operation;
 			_terms = terms;
@@ -35,6 +35,16 @@ namespace MathExercisesGenerator
 			get { return _userValue.HasValue && CorrectValue != UserValue; }
 		}
 
+		public bool UserHasAnswered
+		{
+			get { return _userValue.HasValue; }
+		}
+
+		public void Solve()
+		{
+			UserValue = CorrectValue;
+		}
+
 		private int? _userValue;
 		public int? UserValue
 		{
@@ -42,9 +52,11 @@ namespace MathExercisesGenerator
 			set
 			{
 				_userValue = value;
+
 				RaisePropertyChanged( "UserValue" );
 				RaisePropertyChanged( "IsCorrect" );
 				RaisePropertyChanged( "IsIncorrect" );
+				RaisePropertyChanged( "UserHasAnswered" );
 			}
 		}
 	}

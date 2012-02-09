@@ -21,6 +21,8 @@ namespace MathExercisesGenerator
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private ApplicationViewModel _viewModel;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -37,11 +39,11 @@ namespace MathExercisesGenerator
 		{
 			var settings = Settings.Default;
 
-			ApplicationViewModel vm = new ApplicationViewModel(
+			_viewModel = new ApplicationViewModel(
 				Range.Create( settings.MinValue, settings.MaxValue ),
 				settings.ExercisesCount, settings.Complexity );
 
-			DataContext = vm;
+			DataContext = _viewModel;
 		}
 
 		private void MoreExercisesButtonClick( object sender, RoutedEventArgs e )
@@ -53,7 +55,7 @@ namespace MathExercisesGenerator
 		{
 			if ( e.Key == Key.F2 )
 			{
-				SettingsEditor editor = new SettingsEditor { DataContext = Settings.Default };
+				SettingsEditor editor = new SettingsEditor { DataContext = Settings.Default, Owner = this };
 				if ( editor.ShowDialog() == true )
 				{
 					CreateExamples();
@@ -63,6 +65,14 @@ namespace MathExercisesGenerator
 			{
 				// refresh
 				CreateExamples();
+			}
+			else if ( e.Key == Key.Space && Keyboard.IsKeyDown( Key.LeftCtrl ) )
+			{
+				var firstUnsolved = _viewModel.Exercises.FirstOrDefault(ex => !ex.IsCorrect);
+				if ( firstUnsolved != null )
+				{
+					firstUnsolved.Solve();
+				}
 			}
 		}
 	}
