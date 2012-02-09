@@ -20,8 +20,7 @@ namespace MathExercisesGenerator
 																maxComplexity,
 																new NumberGenerator(),
 																new IntegralAdditionGenerator(),
-																new IntegralSubtractionGenerator(),
-																new IntegralPositiveMultiplicationGenerator()
+																new IntegralSubtractionGenerator()
 																);
 
 			ConvertToLineVisitor<int> visitor = new ConvertToLineVisitor<int>();
