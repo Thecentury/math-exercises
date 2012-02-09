@@ -35,24 +35,34 @@ namespace Generator.Core.Generators
 		public override Operation<T> Generate( GenerationContext<T> context )
 		{
 			int attemptCounter = 0;
-			do
+
+			context.IncreaseDepth();
+
+			try
 			{
-				var generator = GetSuitableGenerator( context );
-
-				var clonedContext = context.CloneWithMaxComplexity( context.MaxComplexity - generator.Complexity );
-				var op = generator.Generate( clonedContext );
-
-				bool passesConstraints = context.PassesConstraints( op );
-				if ( passesConstraints )
+				do
 				{
-					return op;
-				}
-				else
-				{
-					attemptCounter++;
-					Debug.WriteLine( "Attempt #{0}", attemptCounter );
-				}
-			} while ( true );
+					var generator = GetSuitableGenerator( context );
+
+					var clonedContext = context.CloneWithMaxComplexity( context.MaxComplexity - generator.Complexity );
+					var op = generator.Generate( clonedContext );
+
+					bool passesConstraints = context.PassesConstraints( op );
+					if ( passesConstraints )
+					{
+						return op;
+					}
+					else
+					{
+						attemptCounter++;
+						Debug.WriteLine( "Attempt #{0}", attemptCounter );
+					}
+				} while ( true );
+			}
+			finally
+			{
+				context.DecreaseDepth();
+			}
 		}
 
 		private IOperationGenerator<T> GetSuitableGenerator( GenerationContext<T> context )
