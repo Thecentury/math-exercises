@@ -60,13 +60,15 @@
 						Margin="10,10,3,10"
 						Focusable="False"
 						Style="{StaticResource textStyle}">
-				<ItemsControl ItemsSource="{Binding Terms}" IsTabStop="False">
+				<MathExercisesGenerator:OperationView DataContext="{Binding OperationViewModel}"
+													  FontSize="20"/>
+				<!--<ItemsControl ItemsSource="{Binding Terms}" IsTabStop="False">
 					<ItemsControl.ItemsPanel>
 						<ItemsPanelTemplate>
 							<StackPanel Orientation="Horizontal" IsItemsHost="True"/>
 						</ItemsPanelTemplate>
 					</ItemsControl.ItemsPanel>
-				</ItemsControl>
+				</ItemsControl>-->
 				<TextBlock Margin="4,0,0,0">
 					=
 				</TextBlock>

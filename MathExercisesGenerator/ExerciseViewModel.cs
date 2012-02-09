@@ -8,11 +8,18 @@ namespace MathExercisesGenerator
 	{
 		private readonly Operation<int> _operation;
 		private readonly List<TermViewModel> _terms;
+		private readonly OperationViewModel _operationViewModel;
 
-		public ExerciseViewModel( Operation<int> operation, List<TermViewModel> terms )
+		public ExerciseViewModel( Operation<int> operation, List<TermViewModel> terms, OperationViewModel operationViewModel )
 		{
 			_operation = operation;
 			_terms = terms;
+			_operationViewModel = operationViewModel;
+		}
+
+		public OperationViewModel OperationViewModel
+		{
+			get { return _operationViewModel; }
 		}
 
 		public List<TermViewModel> Terms
