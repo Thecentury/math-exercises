@@ -49,25 +49,37 @@ namespace MathExercisesGenerator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2.2")]
-        public double Complexity {
-            get {
-                return ((double)(this["Complexity"]));
-            }
-            set {
-                this["Complexity"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int ExercisesCount {
             get {
                 return ((int)(this["ExercisesCount"]));
             }
             set {
                 this["ExercisesCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2.2")]
+        public double MinComplexity {
+            get {
+                return ((double)(this["MinComplexity"]));
+            }
+            set {
+                this["MinComplexity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3.2")]
+        public double MaxComplexity {
+            get {
+                return ((double)(this["MaxComplexity"]));
+            }
+            set {
+                this["MaxComplexity"] = value;
             }
         }
     }

@@ -14,22 +14,25 @@ namespace MathExercisesGenerator
 	{
 		private readonly List<ExerciseViewModel> _exercises = new List<ExerciseViewModel>();
 
-		public ApplicationViewModel( Range<int> range, int exercisesCount = 5, double maxComplexity = 1.0 )
+		public ApplicationViewModel( Range<int> range, int exercisesCount, Range<double> сomplexityRange )
 		{
-			IntExerciseGenerator gen = new IntExerciseGenerator( new ProbabilityGenerator(), new IntRandomNumberGenerator(),
-																maxComplexity,
-																new NumberGenerator(),
-																new IntegralAdditionGenerator(),
-																new IntegralSubtractionGenerator(),
-																new IntegralPositiveMultiplicationGenerator()
-																);
-
 			ConvertToLineVisitor<int> convertToLineVisitorvisitor = new ConvertToLineVisitor<int>();
 			ConvertToOperationViewModelVisitor convertToOperationViewModelVisitor = new ConvertToOperationViewModelVisitor();
 			BracketsVisitor bracketsVisitor = new BracketsVisitor();
+			var rnd = new ProbabilityGenerator();
 
 			for ( int i = 0; i < exercisesCount; i++ )
 			{
+				double complexity = rnd.Generate( сomplexityRange );
+
+				IntExerciseGenerator gen = new IntExerciseGenerator( rnd, new IntRandomNumberGenerator(),
+																	complexity,
+																	new NumberGenerator(),
+																	new IntegralAdditionGenerator(),
+																	new IntegralSubtractionGenerator(),
+																	new IntegralPositiveMultiplicationGenerator()
+																	);
+
 				var op = gen.Generate( range );
 
 				var opWithBrackets = bracketsVisitor.VisitCore( op );
