@@ -41,7 +41,7 @@ namespace MathExercisesGenerator
 
 			_viewModel = new ApplicationViewModel(
 				Range.Create( settings.MinValue, settings.MaxValue ),
-				settings.ExercisesCount, settings.Complexity );
+				settings.ExercisesCount, Range.Create( settings.MinComplexity, settings.MaxComplexity ) );
 
 			DataContext = _viewModel;
 		}
@@ -68,7 +68,7 @@ namespace MathExercisesGenerator
 			}
 			else if ( e.Key == Key.Space && Keyboard.IsKeyDown( Key.LeftCtrl ) )
 			{
-				var firstUnsolved = _viewModel.Exercises.FirstOrDefault(ex => !ex.IsCorrect);
+				var firstUnsolved = _viewModel.Exercises.FirstOrDefault( ex => !ex.IsCorrect );
 				if ( firstUnsolved != null )
 				{
 					firstUnsolved.Solve();

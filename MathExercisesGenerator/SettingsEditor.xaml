@@ -5,12 +5,12 @@
 		WindowStartupLocation="CenterOwner"
 		ShowInTaskbar="False">
 	<DockPanel LastChildFill="True">
-		
+
 		<StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
 			<Button Padding="5" Margin="5" Name="saveButton" Click="SaveButtonClick">Сохранить</Button>
 			<Button Padding="5" Margin="5" Name="cancelButton" Click="CancelButtonClick">Отменить</Button>
 		</StackPanel>
-		
+
 		<Grid Margin="5">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition/>
@@ -22,22 +22,31 @@
 				<RowDefinition/>
 				<RowDefinition/>
 				<RowDefinition/>
+				<RowDefinition/>
 			</Grid.RowDefinitions>
 
 			<Label Grid.Column="0" Grid.Row="0">Минимум:</Label>
 			<TextBox Grid.Column="1" Grid.Row="0"
-			Text="{Binding MinValue, Mode=TwoWay}"/>
+				Text="{Binding MinValue, Mode=TwoWay}"/>
 
 			<Label Grid.Column="0" Grid.Row="1">Максимум:</Label>
 			<TextBox Grid.Column="1" Grid.Row="1"
-			Text="{Binding MaxValue, Mode=TwoWay}"/>
+				Text="{Binding MaxValue, Mode=TwoWay}"/>
 
-			<Label Grid.Column="0" Grid.Row="2">Сложность:</Label>
+			<Label Grid.Column="0" Grid.Row="2">
+				<TextBlock>Сложность <Span BaselineAlignment="Subscript" FontSize="10">min</Span>:</TextBlock>
+			</Label>
 			<TextBox Grid.Column="1" Grid.Row="2"
-				 Text="{Binding Complexity, Mode=TwoWay}"/>
+				 Text="{Binding MinComplexity, Mode=TwoWay}"/>
 
-			<Label Grid.Column="0" Grid.Row="3">Число примеров:</Label>
+			<Label Grid.Column="0" Grid.Row="3">
+				<TextBlock>Сложность <Span BaselineAlignment="Subscript" FontSize="10">max</Span>:</TextBlock>
+			</Label>
 			<TextBox Grid.Column="1" Grid.Row="3"
+				 Text="{Binding MaxComplexity, Mode=TwoWay}"/>
+
+			<Label Grid.Column="0" Grid.Row="4">Число примеров:</Label>
+			<TextBox Grid.Column="1" Grid.Row="4"
 				 Text="{Binding ExercisesCount, Mode=TwoWay}"/>
 		</Grid>
 	</DockPanel>
