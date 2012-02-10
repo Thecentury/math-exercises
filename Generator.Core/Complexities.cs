@@ -9,5 +9,7 @@ namespace Generator.Core
 		public static readonly double NumberComplexity = 0;
 
 		public static readonly double MultiplicationComplexity = 1.1;
+
+		public static readonly double DivisionComplexity = 1.1;
 	}
 }

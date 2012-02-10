@@ -12,32 +12,30 @@ namespace Generator.Core
 
 		private List<TermViewModel> Visit( SubtractOperation<T> op )
 		{
-			List<TermViewModel> list = new List<TermViewModel>();
-
-			list.AddRange( VisitCore( op.Left ) );
-			list.Add( new SubtractionViewModel() );
-			list.AddRange( VisitCore( op.Right ) );
-
-			return list;
+			return VisitBinaryOp( op, new SubtractionViewModel() );
 		}
 
 		private List<TermViewModel> Visit( AddOperation<T> op )
 		{
-			List<TermViewModel> list = new List<TermViewModel>();
-
-			list.AddRange( VisitCore( op.Left ) );
-			list.Add( new AdditionViewModel() );
-			list.AddRange( VisitCore( op.Right ) );
-
-			return list;
+			return VisitBinaryOp( op, new AdditionViewModel() );
 		}
 
 		private List<TermViewModel> Visit( MultiplyOperation<T> op )
 		{
+			return VisitBinaryOp( op, new MultiplicationViewModel() );
+		}
+
+		private List<TermViewModel> Visit( DivideOperation<T> op )
+		{
+			return VisitBinaryOp( op, new DivisionViewModel() );
+		}
+
+		private List<TermViewModel> VisitBinaryOp( BinaryOperation<T> op, TermViewModel operation )
+		{
 			List<TermViewModel> list = new List<TermViewModel>();
 
 			list.AddRange( VisitCore( op.Left ) );
-			list.Add( new MultiplicationViewModel() );
+			list.Add( operation );
 			list.AddRange( VisitCore( op.Right ) );
 
 			return list;

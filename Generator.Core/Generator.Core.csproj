@@ -75,6 +75,7 @@
     <Compile Include="BracketsVisitor.cs" />
     <Compile Include="IVisitor.cs" />
     <Compile Include="MathExtensions.cs" />
+    <Compile Include="Operations\DivideOperation.cs" />
     <Compile Include="Operations\MultiplyOperation.cs" />
     <Compile Include="Operations\Number.cs" />
     <Compile Include="Generators\NumberGenerator.cs" />

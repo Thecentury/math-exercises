@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace MathExercisesGenerator.Tests
 {
 	[TestFixture]
-	public class IntegralMultiplicationGeneratorTests : BinaryOperationGeneratorTests
+	public class GeneratorTests : BinaryOperationGeneratorTests
 	{
 		[Test]
 		public void ShouldCreateMultiplication()
@@ -23,6 +23,23 @@ namespace MathExercisesGenerator.Tests
 
 			Assert.NotNull( op );
 			Assert.That( op, Is.InstanceOf<MultiplyOperation<int>>() );
+
+			var value = op.Evaluate();
+		}
+
+		[Test]
+		public void ShouldCreateDivision()
+		{
+			const double complexity = 2;
+			var context = CreateMockContext( complexity, Range.Create( 2, 2 ), Range.Create( 2, 2 ) );
+
+			var generator = new IntegralDivisionGenerator();
+			var op = generator.Generate( context );
+
+			Assert.NotNull( op );
+			Assert.That( op, Is.InstanceOf<DivideOperation<int>>() );
+
+			var value = op.Evaluate();
 		}
 	}
 }
