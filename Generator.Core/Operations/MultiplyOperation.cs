@@ -1,4 +1,4 @@
-using Microsoft.FSharp.Math;
+﻿using Microsoft.FSharp.Math;
 
 namespace Generator.Core.Operations
 {
@@ -22,7 +22,7 @@ namespace Generator.Core.Operations
 
 		public sealed override string OperationText
 		{
-			get { return "�"; }
+			get { return "·"; }
 		}
 
 		public sealed override BinaryOperation<T> CloneCore()
