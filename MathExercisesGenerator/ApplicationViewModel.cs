@@ -30,8 +30,8 @@ namespace MathExercisesGenerator
 																	new NumberGenerator(),
 																	new IntegralAdditionGenerator(),
 																	new IntegralSubtractionGenerator(),
-																	new IntegralPositiveMultiplicationGenerator(),
-																	new IntegralDivisionGenerator()
+																	new IntegralPositiveMultiplicationGenerator()
+																	//new IntegralDivisionGenerator()
 																	);
 
 				var op = gen.Generate( range );
