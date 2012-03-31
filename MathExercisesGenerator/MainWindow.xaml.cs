@@ -66,7 +66,7 @@ namespace MathExercisesGenerator
 				// refresh
 				CreateExamples();
 			}
-			else if ( e.Key == Key.Space && Keyboard.IsKeyDown( Key.LeftCtrl ) )
+			else if ( e.Key == Key.Space && (Keyboard.IsKeyDown( Key.LeftCtrl ) || Keyboard.IsKeyDown( Key.RightCtrl )) )
 			{
 				var firstUnsolved = _viewModel.Exercises.FirstOrDefault( ex => !ex.IsCorrect );
 				if ( firstUnsolved != null )
