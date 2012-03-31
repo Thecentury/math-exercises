@@ -17,5 +17,14 @@
     <Setting Name="MaxComplexity" Type="System.Double" Scope="User">
       <Value Profile="(Default)">3.2</Value>
     </Setting>
+    <Setting Name="AdditionEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SubtractionEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MultiplicationEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

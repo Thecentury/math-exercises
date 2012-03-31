@@ -23,6 +23,9 @@
 				<RowDefinition/>
 				<RowDefinition/>
 				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
 			</Grid.RowDefinitions>
 
 			<Label Grid.Column="0" Grid.Row="0">Минимум:</Label>
@@ -48,6 +51,21 @@
 			<Label Grid.Column="0" Grid.Row="4">Число примеров:</Label>
 			<TextBox Grid.Column="1" Grid.Row="4"
 				 Text="{Binding ExercisesCount, Mode=TwoWay}"/>
+
+			<Label Grid.Column="0" Grid.Row="5">Сложение:</Label>
+			<CheckBox Grid.Column="1" Grid.Row="5"
+					  VerticalAlignment="Center"
+					  IsChecked="{Binding AdditionEnabled, Mode=TwoWay}"/>
+			
+			<Label Grid.Column="0" Grid.Row="6">Вычитание:</Label>
+			<CheckBox Grid.Column="1" Grid.Row="6"
+					  VerticalAlignment="Center"
+					  IsChecked="{Binding SubtractionEnabled, Mode=TwoWay}"/>
+
+			<Label Grid.Column="0" Grid.Row="7">Умножение:</Label>
+			<CheckBox Grid.Column="1" Grid.Row="7"
+					  VerticalAlignment="Center"
+					  IsChecked="{Binding MultiplicationEnabled, Mode=TwoWay}"/>
 		</Grid>
 	</DockPanel>
 </Window>
