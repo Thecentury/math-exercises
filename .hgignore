@@ -8,3 +8,4 @@ _ReSharper.*
 *.crunchsolution.cache
 *.csproj.user
 publish/*
+Publish/*

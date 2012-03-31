@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Windows.Documents;
 using Generator.Core;
 using Generator.Core.Constraints;
 using Generator.Core.Generators;
+using MathExercisesGenerator.Properties;
 
 namespace MathExercisesGenerator
 {
@@ -21,18 +23,34 @@ namespace MathExercisesGenerator
 			BracketsVisitor bracketsVisitor = new BracketsVisitor();
 			var rnd = new ProbabilityGenerator();
 
+			var settings = Settings.Default;
+
+			List<IOperationGenerator<int>> generators = new List<IOperationGenerator<int>>();
+			generators.Add( new NumberGenerator() );
+			if ( settings.AdditionEnabled )
+			{
+				generators.Add( new IntegralAdditionGenerator() );
+			}
+			if ( settings.SubtractionEnabled )
+			{
+				generators.Add( new IntegralSubtractionGenerator() );
+			}
+			if ( settings.MultiplicationEnabled )
+			{
+				generators.Add( new IntegralPositiveMultiplicationGenerator() );
+			}
+
+			var generatorsArray = generators.ToArray();
+
 			for ( int i = 0; i < exercisesCount; i++ )
 			{
 				double complexity = rnd.Generate( сomplexityRange );
 
+
 				IntExerciseGenerator gen = new IntExerciseGenerator( rnd, new IntRandomNumberGenerator(),
 																	complexity,
-																	new NumberGenerator(),
-																	new IntegralAdditionGenerator(),
-																	new IntegralSubtractionGenerator(),
-																	new IntegralPositiveMultiplicationGenerator()
-																	//new IntegralDivisionGenerator()
-																	);
+																	generatorsArray );
+				//new IntegralDivisionGenerator()
 
 				var op = gen.Generate( range );
 
