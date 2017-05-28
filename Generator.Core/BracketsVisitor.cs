@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using Generator.Core.Operations;
+﻿using Generator.Core.Operations;
 
 namespace Generator.Core
 {

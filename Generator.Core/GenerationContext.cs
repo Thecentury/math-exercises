@@ -1,11 +1,9 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Globalization;
 using Generator.Core.Constraints;
 using Generator.Core.Operations;
 using JetBrains.Annotations;
-using Microsoft.FSharp.Math;
 
 namespace Generator.Core
 {

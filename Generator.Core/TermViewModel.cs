@@ -1,5 +1,3 @@
-using System.Windows.Media;
-
 namespace Generator.Core
 {
 	public abstract class TermViewModel
