@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Windows.Documents;
 using Generator.Core;
-using Generator.Core.Constraints;
 using Generator.Core.Generators;
 using MathExercisesGenerator.Properties;
 

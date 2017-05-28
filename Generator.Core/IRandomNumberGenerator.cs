@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Generator.Core
+﻿namespace Generator.Core
 {
 	public interface IRandomNumberGenerator<T>
 	{
